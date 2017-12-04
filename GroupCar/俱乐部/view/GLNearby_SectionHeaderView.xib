@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GLNearby_SectionHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="261" height="65"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Or9-hS-P0X">
+                    <rect key="frame" x="0.0" y="0.0" width="261" height="65"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom-club" translatesAutoresizingMaskIntoConstraints="NO" id="vhL-vY-34o">
+                            <rect key="frame" x="0.0" y="0.0" width="261" height="65"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轻松自驾游" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsr-0B-Xgx">
+                            <rect key="frame" x="87.5" y="20" width="87" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="Tgb-JT-szw"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="fQW-U4-04H"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.336833655834198" green="0.3341783881187439" blue="0.9320065975189209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="vhL-vY-34o" secondAttribute="bottom" id="DCU-C4-A81"/>
+                        <constraint firstItem="wsr-0B-Xgx" firstAttribute="centerY" secondItem="Or9-hS-P0X" secondAttribute="centerY" id="H4y-zM-9AV"/>
+                        <constraint firstAttribute="trailing" secondItem="vhL-vY-34o" secondAttribute="trailing" id="Na9-SF-Lj5"/>
+                        <constraint firstItem="vhL-vY-34o" firstAttribute="leading" secondItem="Or9-hS-P0X" secondAttribute="leading" id="PUc-nQ-dhd"/>
+                        <constraint firstItem="vhL-vY-34o" firstAttribute="top" secondItem="Or9-hS-P0X" secondAttribute="top" id="YkX-uS-bmd"/>
+                        <constraint firstItem="wsr-0B-Xgx" firstAttribute="centerX" secondItem="Or9-hS-P0X" secondAttribute="centerX" id="fjC-xZ-JyH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Or9-hS-P0X" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EhU-Gx-a38"/>
+                <constraint firstAttribute="bottom" secondItem="Or9-hS-P0X" secondAttribute="bottom" id="bYr-Zv-hm2"/>
+                <constraint firstItem="Or9-hS-P0X" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ggB-Pp-CeQ"/>
+                <constraint firstAttribute="trailing" secondItem="Or9-hS-P0X" secondAttribute="trailing" id="lli-kd-5BD"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="titleLb" destination="wsr-0B-Xgx" id="X1y-S6-UcR"/>
+            </connections>
+            <point key="canvasLocation" x="53.5" y="90.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bottom-club" width="375" height="50"/>
+    </resources>
+</document>

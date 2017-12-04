@@ -1,0 +1,16 @@
+//
+//  GroupCar.pch
+//  GroupCar
+//
+//  Created by 龚磊 on 2017/8/23.
+//  Copyright © 2017年 三君科技有限公司. All rights reserved.
+//
+
+#ifndef GroupCar_pch
+#define GroupCar_pch
+
+#import "Const.h"
+#import "UIView+Extension.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+#endif /* GroupCar_pch */

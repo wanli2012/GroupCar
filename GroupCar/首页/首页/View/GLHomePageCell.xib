@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="244" id="KGk-i7-Jjw" customClass="GLHomePageCell">
+            <rect key="frame" x="0.0" y="0.0" width="398" height="244"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="398" height="243"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B5a-QG-xl2">
+                        <rect key="frame" x="10" y="0.0" width="378" height="234"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlb-0G-y9a">
+                        <rect key="frame" x="10" y="204" width="378" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址: 锦江区东门大桥xxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4HG-Gs-1vG">
+                                <rect key="frame" x="10" y="0.0" width="137" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="地址: 锦江区东门大桥xxxxx" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-fB-xkH">
+                                <rect key="frame" x="157" y="0.0" width="211" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40784313725490196" green="0.40784313725490196" blue="0.40784313725490196" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4HG-Gs-1vG" firstAttribute="leading" secondItem="rlb-0G-y9a" secondAttribute="leading" constant="10" id="0Wk-CJ-tlN"/>
+                            <constraint firstAttribute="bottom" secondItem="Nee-fB-xkH" secondAttribute="bottom" id="EBT-rc-8Ym"/>
+                            <constraint firstAttribute="bottom" secondItem="4HG-Gs-1vG" secondAttribute="bottom" id="F1c-63-DLF"/>
+                            <constraint firstItem="Nee-fB-xkH" firstAttribute="leading" secondItem="4HG-Gs-1vG" secondAttribute="trailing" constant="10" id="eGU-HS-nep"/>
+                            <constraint firstItem="Nee-fB-xkH" firstAttribute="top" secondItem="rlb-0G-y9a" secondAttribute="top" id="kTu-f7-FxW"/>
+                            <constraint firstAttribute="height" constant="30" id="mJd-QW-pGg"/>
+                            <constraint firstAttribute="trailing" secondItem="Nee-fB-xkH" secondAttribute="trailing" constant="10" id="mlk-oo-rbn"/>
+                            <constraint firstItem="4HG-Gs-1vG" firstAttribute="top" secondItem="rlb-0G-y9a" secondAttribute="top" id="pBf-Fa-oST"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="三角Logo" translatesAutoresizingMaskIntoConstraints="NO" id="KyB-NC-wDE">
+                        <rect key="frame" x="10" y="0.0" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="bd1-Eh-1Nl"/>
+                            <constraint firstAttribute="width" secondItem="KyB-NC-wDE" secondAttribute="height" multiplier="1:1" id="sMt-2F-Kqt"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KyB-NC-wDE" firstAttribute="leading" secondItem="B5a-QG-xl2" secondAttribute="leading" id="4PN-50-7Kh"/>
+                    <constraint firstItem="rlb-0G-y9a" firstAttribute="leading" secondItem="B5a-QG-xl2" secondAttribute="leading" id="9t7-jm-JRu"/>
+                    <constraint firstAttribute="bottom" secondItem="B5a-QG-xl2" secondAttribute="bottom" constant="10" id="Nt2-eB-Gjg"/>
+                    <constraint firstItem="B5a-QG-xl2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="bJd-QX-5nf"/>
+                    <constraint firstItem="B5a-QG-xl2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cQk-jZ-1Ya"/>
+                    <constraint firstAttribute="bottom" secondItem="rlb-0G-y9a" secondAttribute="bottom" constant="10" id="dVs-Q7-Eys"/>
+                    <constraint firstItem="KyB-NC-wDE" firstAttribute="top" secondItem="B5a-QG-xl2" secondAttribute="top" id="gEe-yo-oqA"/>
+                    <constraint firstItem="rlb-0G-y9a" firstAttribute="trailing" secondItem="B5a-QG-xl2" secondAttribute="trailing" id="kVy-rm-qF8"/>
+                    <constraint firstAttribute="trailing" secondItem="B5a-QG-xl2" secondAttribute="trailing" constant="10" id="p1g-vB-hcC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="49" y="101"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="三角Logo" width="55" height="55"/>
+    </resources>
+</document>

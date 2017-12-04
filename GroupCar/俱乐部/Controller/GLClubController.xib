@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLClubController">
+            <connections>
+                <outlet property="tableview" destination="iX2-X9-9PC" id="Wi8-pq-Pk5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJG-hh-SOp">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="俱乐部" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRi-oz-IeV">
+                            <rect key="frame" x="10" y="29" width="52" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="KzT-p0-UNe"/>
+                                <constraint firstAttribute="height" constant="20" id="eAP-WT-Uvc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.1624269783" green="0.14623844620000001" blue="0.92543578150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="O5R-f2-4tx"/>
+                        <constraint firstItem="sRi-oz-IeV" firstAttribute="leading" secondItem="gJG-hh-SOp" secondAttribute="leading" constant="10" id="UG5-nc-VKi"/>
+                        <constraint firstAttribute="bottom" secondItem="sRi-oz-IeV" secondAttribute="bottom" constant="15" id="y7E-d4-8Kj"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iX2-X9-9PC">
+                    <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ebe-gL-RQK"/>
+                        <outlet property="delegate" destination="-1" id="oFn-uj-dj2"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="iX2-X9-9PC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Cy5-MP-6A0"/>
+                <constraint firstItem="gJG-hh-SOp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Y1C-YU-KNu"/>
+                <constraint firstAttribute="trailing" secondItem="gJG-hh-SOp" secondAttribute="trailing" id="cVR-MP-cSm"/>
+                <constraint firstItem="gJG-hh-SOp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dgt-TZ-ocT"/>
+                <constraint firstAttribute="bottom" secondItem="iX2-X9-9PC" secondAttribute="bottom" constant="49" id="gn5-SM-MfH"/>
+                <constraint firstItem="iX2-X9-9PC" firstAttribute="top" secondItem="gJG-hh-SOp" secondAttribute="bottom" id="jIp-SP-iEg"/>
+                <constraint firstAttribute="trailing" secondItem="iX2-X9-9PC" secondAttribute="trailing" id="rVD-du-eK8"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

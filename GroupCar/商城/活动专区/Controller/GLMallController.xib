@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMallController">
+            <connections>
+                <outlet property="buttonview" destination="5ms-h4-Row" id="s4F-wW-h3s"/>
+                <outlet property="fitterButton" destination="5gd-05-PoX" id="p9Q-q2-522"/>
+                <outlet property="tableview" destination="9s3-GU-h2R" id="jgZ-jr-DPQ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNh-8R-pl7">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车辆列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIo-Oy-W84">
+                            <rect key="frame" x="10" y="29" width="70" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="RWc-ql-PdY"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="ZQe-r0-N8t"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.1624269783" green="0.14623844620000001" blue="0.92543578150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="6W8-Hy-5Vv"/>
+                        <constraint firstItem="EIo-Oy-W84" firstAttribute="leading" secondItem="gNh-8R-pl7" secondAttribute="leading" constant="10" id="lbE-HQ-wbl"/>
+                        <constraint firstAttribute="bottom" secondItem="EIo-Oy-W84" secondAttribute="bottom" constant="15" id="mFU-u2-mMD"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ms-h4-Row">
+                    <rect key="frame" x="0.0" y="64" width="375" height="45"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gd-05-PoX">
+                            <rect key="frame" x="282" y="0.0" width="93" height="45"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="筛选" image="filter">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="5gd-05-PoX" firstAttribute="width" secondItem="5ms-h4-Row" secondAttribute="width" multiplier="1/4" id="5ZI-Zj-xNH"/>
+                        <constraint firstAttribute="bottom" secondItem="5gd-05-PoX" secondAttribute="bottom" id="ZTp-jv-c3Y"/>
+                        <constraint firstItem="5gd-05-PoX" firstAttribute="top" secondItem="5ms-h4-Row" secondAttribute="top" id="dJm-fV-72j"/>
+                        <constraint firstAttribute="trailing" secondItem="5gd-05-PoX" secondAttribute="trailing" id="ezg-lb-psi"/>
+                        <constraint firstAttribute="height" constant="45" id="ui3-G8-8B7"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9s3-GU-h2R">
+                    <rect key="frame" x="0.0" y="109" width="375" height="509"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="VPu-RD-uOZ"/>
+                        <outlet property="delegate" destination="-1" id="ZlW-rd-GnC"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gNh-8R-pl7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="27e-1Q-9xu"/>
+                <constraint firstItem="5ms-h4-Row" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BXm-63-BQc"/>
+                <constraint firstItem="9s3-GU-h2R" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HXr-ci-QXS"/>
+                <constraint firstAttribute="trailing" secondItem="gNh-8R-pl7" secondAttribute="trailing" id="O1K-rz-97a"/>
+                <constraint firstAttribute="trailing" secondItem="5ms-h4-Row" secondAttribute="trailing" id="P5l-kK-VDh"/>
+                <constraint firstAttribute="trailing" secondItem="9s3-GU-h2R" secondAttribute="trailing" id="Qha-cs-Xt5"/>
+                <constraint firstItem="9s3-GU-h2R" firstAttribute="top" secondItem="5ms-h4-Row" secondAttribute="bottom" id="VfB-j6-ey1"/>
+                <constraint firstAttribute="bottom" secondItem="9s3-GU-h2R" secondAttribute="bottom" constant="49" id="dNU-gk-apn"/>
+                <constraint firstItem="gNh-8R-pl7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hkE-Et-AxW"/>
+                <constraint firstItem="5ms-h4-Row" firstAttribute="top" secondItem="gNh-8R-pl7" secondAttribute="bottom" id="oXa-aj-4za"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="filter" width="13" height="15"/>
+    </resources>
+</document>

@@ -47,9 +47,8 @@
     //首页
     GLHomePageController *homeVC = [[GLHomePageController alloc] init];
     BaseNavigationViewController *homeNav = [[BaseNavigationViewController alloc] initWithRootViewController:homeVC];
-    homeNav.tabBarItem = [self barTitle:@"首页" image:@"首页" selectImage:@"首页点中"];
+    homeNav.tabBarItem = [self barTitle:@"商城" image:@"首页" selectImage:@"首页点中"];
 
-    
 //    商城
 //    GLMallController *mallVC = [[GLMallController alloc] init];
 //    BaseNavigationViewController *mallNav = [[BaseNavigationViewController alloc] initWithRootViewController:mallVC];
@@ -57,7 +56,7 @@
 
     LBMallHomepageViewController *mallVC = [[LBMallHomepageViewController alloc] init];
     BaseNavigationViewController *mallNav = [[BaseNavigationViewController alloc] initWithRootViewController:mallVC];
-    mallNav.tabBarItem = [self barTitle:@"商城" image:@"商城" selectImage:@"商城点中"];
+    mallNav.tabBarItem = [self barTitle:@"收藏" image:@"商城" selectImage:@"商城点中"];
     //俱乐部
     GLClubController *clubVC = [[GLClubController alloc] init];
     BaseNavigationViewController *clubNav = [[BaseNavigationViewController alloc] initWithRootViewController:clubVC];

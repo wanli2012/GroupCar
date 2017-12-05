@@ -17,7 +17,7 @@
 #define sizeScaleActivity  (273/361.0)
 #define sizeScaleHot  (254/353.0)
 
-@interface LBMallHomepageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface LBMallHomepageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LBMallHomePageSectionHeaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
 @property (strong, nonatomic)MineCollectionHeaderV *mineCollectionHeaderV;
@@ -53,6 +53,29 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     
+}
+#pragma mark - LBMallHomePageSectionHeaderDelegate 查看更多
+- (void)more:(NSInteger)index{
+    switch (index) {
+        case 0:
+        {
+            NSLog(@"---------");
+        }
+            break;
+        case 1:
+        {
+            NSLog(@"活动专区 ---- 更多");
+        }
+            break;
+        case 2:
+        {
+            NSLog(@"热门推荐 ---- 更多");
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -118,6 +141,15 @@
             _mallHomePageSectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                         withReuseIdentifier:@"LBMallHomePageSectionHeader"
                                                                                forIndexPath:indexPath];
+        _mallHomePageSectionHeader.delegate = self;
+        _mallHomePageSectionHeader.section = indexPath.section;
+        
+        if(indexPath.section == 1){
+            
+            _mallHomePageSectionHeader.titleLabel.text = @"活动专区";
+        }else if(indexPath.section == 2){
+            _mallHomePageSectionHeader.titleLabel.text = @"热门推荐";
+        }
         
         return _mallHomePageSectionHeader;
     

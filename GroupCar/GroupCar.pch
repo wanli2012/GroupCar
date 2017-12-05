@@ -12,5 +12,10 @@
 #import "Const.h"
 #import "UIView+Extension.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UserModel.h"
+#import "LoadWaitView.h"
+#import "NetworkManager.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "predicateModel.h"
 
 #endif /* GroupCar_pch */

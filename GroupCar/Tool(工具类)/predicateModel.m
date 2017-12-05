@@ -28,7 +28,7 @@
         /**
          * 移动号段正则表达式
          */
-        NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
+        NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[0-9]))\\d{8}|(1705)\\d{7}$";
         /**
          * 联通号段正则表达式
          */
@@ -104,7 +104,6 @@
         result = [pred evaluateWithObject:pass];
 
        return result;
-    
 }
 
 //直接调用这个方法就行
@@ -136,7 +135,38 @@
         return 4;
         //可能包含标点符号的情況，或是包含非英文的文字，这里再依照需求详细判断想呈现的错误
     }
-    
 }
+
+
+//只能输入字母或数字;
++ (BOOL)inputShouldLetterOrNum:(NSString *)inputString {
+    if (inputString.length == 0) return NO;
+    NSString *regex =@"[a-zA-Z0-9]*";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [pred evaluateWithObject:inputString];
+}
+//只能输入字母
++ (BOOL)inputShouldLetter:(NSString *)inputString {
+    if (inputString.length == 0) return NO;
+    NSString *regex =@"[a-zA-Z]*";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [pred evaluateWithObject:inputString];
+}
+//只能输入数字
++ (BOOL)inputShouldNumber:(NSString *)inputString {
+    if (inputString.length == 0) return NO;
+    NSString *regex =@"[0-9]*";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [pred evaluateWithObject:inputString];
+}
+//判断全汉字
++ (BOOL)inputShouldChinese:(NSString *)inputString {
+    if (inputString.length == 0) return NO;
+    NSString *regex = @"[\u4e00-\u9fa5]+";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [pred evaluateWithObject:inputString];
+}
+
+
 
 @end

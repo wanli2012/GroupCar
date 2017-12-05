@@ -16,27 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    self.navigationBar.barTintColor = YYSRGBColor(120, 161, 255, 1);
+
     self.navigationBar.barTintColor = [UIColor whiteColor];
-//    self.navigationBar.tintColor = YYSRGBColor(51, 51, 51, 1);
 
-    
     [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:YYSRGBColor(51, 51, 51, 1)}];
-    
-    
 }
-
-//+(void)initialize
-//{
-//    UINavigationBar *naBar = [UINavigationBar appearance];
-//    naBar.tintColor = YYSRGBColor(230, 38, 7);
-//    naBar.backgroundColor = YYSRGBColor(230, 38, 7);
-//    naBar.translucent = NO;
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[NSForegroundColorAttributeName] = YYSRGBColor(230, 38, 7);
-//    [naBar setTitleTextAttributes:dict];
-//}
 
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
@@ -47,28 +31,93 @@
     
     [self.visibleViewController.navigationItem setHidesBackButton:YES];
     
-    UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+    UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 44)];
     [button setImage:[UIImage imageNamed:@"f返回-"] forState:UIControlStateNormal];
     button.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-    
-//    [button setTitle:@"全部分类" forState:UIControlStateNormal];
-//    [button setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
-//    [button setTitleColor:YYSRGBColor(104, 103, 239, 1) forState:UIControlStateNormal];
-    
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;//左对齐(UIControlContentHorizontalAlignment、CenterUIControlContentHorizontalAlignmentFill、UIControlContentHorizontalAlignmentRight)
-\
     [button addTarget:self action:@selector(popself) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *ba=[[UIBarButtonItem alloc]initWithCustomView:button];
-    
     self.visibleViewController.navigationItem.leftBarButtonItem = ba;
+
+    [self setDisplayCustomTitleText:viewController.navigationItem.title];
+    
+}
+- (void)setDisplayCustomTitleText:(NSString*)text
+
+{
+    // Init views with rects with height and y pos
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    
+    // Use autoresizing to restrict the bounds to the area that the titleview allows
+    
+    titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    
+    titleView.autoresizesSubviews = YES;
+    
+    titleView.backgroundColor = [UIColor  clearColor];
+    titleView.userInteractionEnabled = YES;
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    
+//    titleLabel.tag = kUIVIEWCONTROLLER_LABEL_TAG;
+    
+    titleLabel.backgroundColor = [UIColor clearColor];
+    
+//    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    titleLabel.font = [UIFont systemFontOfSize:16];
+    titleLabel.textAlignment = NSTextAlignmentLeft;
+    
+    titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    titleLabel.textColor = YYSRGBColor(111, 110, 237, 1);
+    
+    titleLabel.lineBreakMode = NSLineBreakByClipping;
+    
+    titleLabel.userInteractionEnabled = YES;
+    
+    titleLabel.autoresizingMask = titleView.autoresizingMask;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popself)];
+    [titleLabel addGestureRecognizer:tap];
+    
+    CGRect leftViewbounds = self.navigationItem.leftBarButtonItem.customView.bounds;
+    
+    CGRect rightViewbounds = self.navigationItem.rightBarButtonItem.customView.bounds;
+    
+    CGRect frame;
+    
+    CGFloat maxWidth = leftViewbounds.size.width > rightViewbounds.size.width ? leftViewbounds.size.width : rightViewbounds.size.width;
+    
+    maxWidth += 15;//leftview 左右都有间隙，左边是5像素，右边是8像素，加2个像素的阀值 5 ＋ 8 ＋ 2
+    
+    frame = titleLabel.frame;
+    
+    frame.size.width = 100;
+    
+    titleLabel.frame = frame;
+    
+    frame = titleView.frame;
+    
+    frame.size.width = 320 - maxWidth * 2;
+    
+    titleView.frame = frame;
+    
+    // Set the text
+    
+    titleLabel.text = text;
+    
+    // Add as the nav bar's titleview
+    
+    [titleView addSubview:titleLabel];
+    
+    self.visibleViewController.navigationItem.titleView = titleView;
     
 }
 
 -(UIBarButtonItem*) createBackButton
 
 {
-    
     return [[UIBarButtonItem alloc]
             
             initWithTitle:@"返回"

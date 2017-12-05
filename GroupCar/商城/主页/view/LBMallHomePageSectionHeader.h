@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LBMallHomePageSectionHeaderDelegate <NSObject>
+
+@optional
+- (void)more:(NSInteger)index;
+
+@end
+
 @interface LBMallHomePageSectionHeader : UICollectionReusableView
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic, weak)id <LBMallHomePageSectionHeaderDelegate> delegate;
+@property (nonatomic, assign)NSInteger section;
 
 @end

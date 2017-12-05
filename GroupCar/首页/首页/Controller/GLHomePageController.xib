@@ -261,7 +261,7 @@
                                 <rect key="frame" x="0.0" y="300" width="333" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公告" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1z-ya-cDQ">
-                                        <rect key="frame" x="10" y="17" width="30" height="17.5"/>
+                                        <rect key="frame" x="10" y="17.5" width="30" height="17.5"/>
                                         <fontDescription key="fontDescription" name="^cw\EO`W^" family="迷你简汉真广标" pointSize="15"/>
                                         <color key="textColor" red="0.40858465430000002" green="0.40212076899999999" blue="0.9351471066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>

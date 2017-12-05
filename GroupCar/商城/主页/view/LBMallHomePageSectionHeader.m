@@ -8,12 +8,24 @@
 
 #import "LBMallHomePageSectionHeader.h"
 
+@interface LBMallHomePageSectionHeader ()
+@property (weak, nonatomic) IBOutlet UIButton *moreBtn;
+
+
+@end
+
+
 @implementation LBMallHomePageSectionHeader
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-  
     
+}
+- (IBAction)more:(id)sender {
+
+    if([self.delegate respondsToSelector:@selector(more:)]){
+        [self.delegate more:self.section];
+    }
 }
 
 @end

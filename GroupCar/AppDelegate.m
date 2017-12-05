@@ -10,6 +10,8 @@
 #import "BasetabbarViewController.h"
 #import "yindaotuViewController.h"
 
+#import "LBLoginViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -24,7 +26,7 @@
     [self.window makeKeyAndVisible];
     
 //    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isdirect1"] isEqualToString:@"YES"]) {
-        self.window.rootViewController = [[BasetabbarViewController alloc]init];
+        self.window.rootViewController = [[LBLoginViewController alloc]init];
         
 //    }else{
 //        self.window.rootViewController = [[yindaotuViewController alloc]init];

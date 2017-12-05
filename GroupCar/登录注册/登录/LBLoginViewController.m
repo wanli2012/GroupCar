@@ -7,15 +7,17 @@
 //
 
 #import "LBLoginViewController.h"
-#import "UIButton+SetEdgeInsets.h"
-
+#import "LBRegisterViewController.h"
 
 @interface LBLoginViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *registerBt;
-@property (weak, nonatomic) IBOutlet UIButton *loginBt;
-@property (weak, nonatomic) IBOutlet UIButton *forgetBt;
-@property (weak, nonatomic) IBOutlet UIView *baseV1;
-@property (weak, nonatomic) IBOutlet UIView *baseV2;
+
+@property (weak, nonatomic) IBOutlet UIView *accountView;
+@property (weak, nonatomic) IBOutlet UIView *passwordView;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) IBOutlet UITextField *accountTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageV;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnTop;
 
 @end
 
@@ -24,40 +26,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.accountView.layer.cornerRadius = 5.f;
+    self.passwordView.layer.cornerRadius = 5.f;
+    self.accountView.backgroundColor = YYSRGBColor(255, 255, 255, 0.2);
+    self.passwordView.backgroundColor = YYSRGBColor(255, 255, 255, 0.2);
+
+    self.loginBtnTop.constant = 60 * autoSizeScaleY;
+    
+    self.loginBtn.layer.cornerRadius = 5.f;
+    self.loginBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.loginBtn.layer.borderWidth = 1.f;
     
 }
-//注册
-- (IBAction)registerevent:(UIButton *)sender {
-}
-//登录
-- (IBAction)loginevnt:(UIButton *)sender {
-}
 
--(void)updateViewConstraints{
-    [super updateViewConstraints];
-
-    self.forgetBt.layer.cornerRadius = 15;
-    self.forgetBt.clipsToBounds = YES;
-    self.forgetBt.layer.borderWidth = 1;
-    self.forgetBt.layer.borderColor = YYSRGBColor(85, 86, 238, 1).CGColor;
+- (IBAction)login:(id)sender {
+    NSLog(@"登录");
     
-    self.loginBt.layer.cornerRadius = 2;
-    self.loginBt.clipsToBounds = YES;
-
-    self.baseV1.layer.shadowOpacity = 0.5;// 阴影透明度
-    self.baseV1.layer.shadowColor = YYSRGBColor(86, 85, 238, 1).CGColor;// 阴影的颜色
-    self.baseV1.layer.shadowRadius = 10;// 阴影扩散的范围控制
-    self.baseV1.layer.shadowOffset  = CGSizeMake(0, 0);// 阴影的范围
     
-    self.baseV2.layer.shadowOpacity = 0.5;// 阴影透明度
-    self.baseV2.layer.shadowColor = YYSRGBColor(86, 85, 238, 1).CGColor;// 阴影的颜色
-    self.baseV2.layer.shadowRadius = 10;// 阴影扩散的范围控制
-    self.baseV2.layer.shadowOffset  = CGSizeMake(0, 0);// 阴影的范围
-    
-    self.baseV2.layer.cornerRadius = 4;
-    self.baseV1.layer.cornerRadius = 4;
-
-
 }
+- (IBAction)registe:(id)sender {
+    [self presentViewController:[LBRegisterViewController new] animated:YES completion:nil];
+    
+}
+- (IBAction)weixinLogin:(id)sender {
+    NSLog(@"微信登录");
+}
+
 
 @end

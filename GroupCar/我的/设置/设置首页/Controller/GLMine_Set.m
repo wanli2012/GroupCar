@@ -8,13 +8,15 @@
 
 #import "GLMine_Set.h"
 #import "GLMine_SetCell.h"
+#import "GLMine_Set_AccountController.h"
 
 @interface GLMine_Set ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, copy)NSArray *titleArr;
 @property (weak, nonatomic) IBOutlet UIButton *quitBtn;
+@property (nonatomic, copy)NSArray *titleArr;
+@property (nonatomic, copy)NSArray *valueArr;
 
 @end
 
@@ -48,7 +50,40 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%zd",indexPath.row);
+    self.hidesBottomBarWhenPushed = YES;
+    switch (indexPath.row) {
+        case 0:
+        {
+            GLMine_Set_AccountController *accountVC = [[GLMine_Set_AccountController alloc] init];
+            accountVC.navigationItem.title = @"账号安全";
+            [self.navigationController pushViewController:accountVC animated:YES];
+        }
+            break;
+        case 1:
+        {
+            
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
+        case 3:
+        {
+            
+        }
+            break;
+        case 4:
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+
 }
 
 - (NSArray *)titleArr{
@@ -57,4 +92,12 @@
     }
     return _titleArr;
 }
+
+- (NSArray *)valueArr{
+    if (!_valueArr) {
+        _valueArr = @[@"v2.2",@""];
+    }
+    return _valueArr;
+}
+
 @end

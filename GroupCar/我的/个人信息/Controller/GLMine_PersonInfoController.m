@@ -98,7 +98,7 @@
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"token"] = [UserModel defaultUser].token;
-        dict[@"uid"] = [UserModel defaultUser].uid;
+        dict[@"uid"] = [UserModel defaultUser].user_id;
         dict[@"type"] = @"1";
         
 //        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];

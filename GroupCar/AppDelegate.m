@@ -9,11 +9,12 @@
 #import "AppDelegate.h"
 #import "BasetabbarViewController.h"
 #import "yindaotuViewController.h"
-
+#import "IQKeyboardManager.h"
 #import "LBLoginViewController.h"
+#import "BaseNavigationViewController.h"
+#import <Foundation/NSJSONSerialization.h>
 
 @interface AppDelegate ()
-
 @end
 
 @implementation AppDelegate
@@ -21,44 +22,64 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [WXApi registerApp:@"wx3719a66cd8983420"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-//    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isdirect1"] isEqualToString:@"YES"]) {
-        self.window.rootViewController = [[LBLoginViewController alloc]init];
+    BaseNavigationViewController *loginNav = [[BaseNavigationViewController alloc] initWithRootViewController:[[LBLoginViewController alloc] init]];
+    self.window.rootViewController = loginNav;
+    
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isdirect1"] isEqualToString:@"YES"]) {
+        self.window.rootViewController = [[BasetabbarViewController alloc]init];
         
-//    }else{
-//        self.window.rootViewController = [[yindaotuViewController alloc]init];
-//    }
+    }else{
+        self.window.rootViewController = [[yindaotuViewController alloc]init];
+    }
 
 
     return YES;
 }
 
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+    return [WXApi handleOpenURL:url delegate:self];
 }
 
+-(void) onReq:(BaseReq*)req{
+    
+}
+-(void) onResp:(SendAuthResp*)resp{
+    
+    NSLog(@"resp.code = %@  ---errorcode = %zd",resp.code,resp.state);
+    [self getToken:resp.code];
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
+- (void)getToken:(NSString *)code{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
+    manager.requestSerializer.timeoutInterval = 10;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html",@"application/json",nil];
+    
+    NSString *url = @"https://api.weixin.qq.com/sns/oauth2/access_token";
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"appid"] = @"wx3719a66cd8983420";
+    dict[@"secret"] = @"4fae7202764cda777d88c9515b5ca24e";
+    dict[@"code"] = code;
+    dict[@"grant_type"] = @"authorization_code";
+    
+    [manager GET:url parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"weixinLoginNotification" object:nil userInfo:dic];
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+    
 }
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
@@ -96,6 +117,15 @@
     }
     
     return _persistentContainer;
+}
+#pragma mark - 键盘高度处理
+- (void)iqKeyboardShowOrHide {
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
 }
 
 #pragma mark - Core Data Saving support

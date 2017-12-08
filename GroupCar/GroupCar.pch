@@ -13,6 +13,7 @@
 #import "UIView+Extension.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserModel.h"
+#import "usermodelachivar.h"
 #import "LoadWaitView.h"
 #import "NetworkManager.h"
 #import <SVProgressHUD/SVProgressHUD.h>

@@ -50,7 +50,7 @@
     //设置公告view的阴影
     self.noticeView.layer.shadowOpacity = 0.5;// 阴影透明度
     
-    self.noticeView.layer.shadowColor = GLOBAL_COLOR.CGColor;// 阴影的颜色
+    self.noticeView.layer.shadowColor = kMain_Color.CGColor;// 阴影的颜色
     
     self.noticeView.layer.shadowRadius = 3;// 阴影扩散的范围控制
     

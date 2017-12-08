@@ -89,11 +89,11 @@
     
     CGFloat maxWidth = leftViewbounds.size.width > rightViewbounds.size.width ? leftViewbounds.size.width : rightViewbounds.size.width;
     
-    maxWidth += 15;//leftview 左右都有间隙，左边是5像素，右边是8像素，加2个像素的阀值 5 ＋ 8 ＋ 2
+    maxWidth += 5;//leftview 左右都有间隙，左边是5像素，右边是8像素，加2个像素的阀值 5 ＋ 8 ＋ 2
     
     frame = titleLabel.frame;
     
-    frame.size.width = 100;
+    frame.size.width = 120;
     
     titleLabel.frame = frame;
     

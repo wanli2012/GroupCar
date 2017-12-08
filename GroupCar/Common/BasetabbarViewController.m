@@ -13,7 +13,9 @@
 #import "GLMineController.h"
 
 #import "GLequipMentController.h"
-#import "LBMallHomepageViewController.h"
+
+#import "GLCollectController.h"
+#import "LBLoginViewController.h"
 
 @interface BasetabbarViewController ()<UITabBarControllerDelegate>
 
@@ -54,7 +56,7 @@
 //    BaseNavigationViewController *mallNav = [[BaseNavigationViewController alloc] initWithRootViewController:mallVC];
 //    mallNav.tabBarItem = [self barTitle:@"我的" image:@"wd_icon" selectImage:@"wd_selected_icon"];
 
-    LBMallHomepageViewController *mallVC = [[LBMallHomepageViewController alloc] init];
+    GLCollectController *mallVC = [[GLCollectController alloc] init];
     BaseNavigationViewController *mallNav = [[BaseNavigationViewController alloc] initWithRootViewController:mallVC];
     mallNav.tabBarItem = [self barTitle:@"收藏" image:@"商城" selectImage:@"商城点中"];
     //俱乐部
@@ -89,19 +91,19 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     
-//    if (viewController == [tabBarController.viewControllers objectAtIndex:3] || viewController == [tabBarController.viewControllers objectAtIndex:2]) {
-//       
-//        if ([UserModel defaultUser].loginstatus == YES) {
-//            
-//            return YES;
-//        }
-//        GLLoginController *loginVC = [[GLLoginController alloc] init];
-//        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
-//        nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//        [self presentViewController:nav animated:YES completion:nil];
-//        return NO;
-//        
-//    }
+    if (viewController == [tabBarController.viewControllers objectAtIndex:1] || viewController == [tabBarController.viewControllers objectAtIndex:3]) {
+       
+        if ([UserModel defaultUser].loginstatus == YES) {
+            return YES;
+        }
+        
+        LBLoginViewController *loginVC = [[LBLoginViewController alloc] init];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+        nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:nav animated:YES completion:nil];
+        return NO;
+        
+    }
     
     return YES;
 }

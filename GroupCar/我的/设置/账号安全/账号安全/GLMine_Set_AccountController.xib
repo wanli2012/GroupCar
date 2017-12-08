@@ -20,9 +20,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q2Z-Jv-5Ix">
-                    <rect key="frame" x="0.0" y="64" width="297" height="50"/>
+                    <rect key="frame" x="0.0" y="164" width="297" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码修改" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ML-qr-o2f">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ML-qr-o2f">
                             <rect key="frame" x="10" y="16" width="61.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,9 +60,9 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vgu-ke-7K4">
-                    <rect key="frame" x="0.0" y="114" width="297" height="50"/>
+                    <rect key="frame" x="0.0" y="214" width="297" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行卡绑定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k89-m2-cmt">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k89-m2-cmt">
                             <rect key="frame" x="10" y="16" width="76.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
@@ -100,7 +100,7 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vg0-fY-peG">
-                    <rect key="frame" x="0.0" y="164" width="297" height="50"/>
+                    <rect key="frame" x="0.0" y="64" width="297" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二级密码修改" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uL0-uv-x4G">
                             <rect key="frame" x="10" y="16" width="92" height="18"/>
@@ -139,17 +139,62 @@
                         <outletCollection property="gestureRecognizers" destination="I8B-bL-pJU" appends="YES" id="yMq-PS-27S"/>
                     </connections>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wse-Rb-mx2">
+                    <rect key="frame" x="0.0" y="114" width="297" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘记密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mD-B8-w3h">
+                            <rect key="frame" x="10" y="16" width="61.5" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsa-86-l1Z">
+                            <rect key="frame" x="10" y="49" width="287" height="1"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="ftS-Es-UWa"/>
+                            </constraints>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mine_return" translatesAutoresizingMaskIntoConstraints="NO" id="ki6-so-ElM">
+                            <rect key="frame" x="279" y="17.5" width="8" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="67m-vf-uSU"/>
+                                <constraint firstAttribute="width" constant="8" id="MsL-dU-sKh"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="7mD-B8-w3h" firstAttribute="centerY" secondItem="Wse-Rb-mx2" secondAttribute="centerY" id="0Yj-0W-2rd"/>
+                        <constraint firstAttribute="trailing" secondItem="lsa-86-l1Z" secondAttribute="trailing" id="I8H-7R-hun"/>
+                        <constraint firstItem="ki6-so-ElM" firstAttribute="centerY" secondItem="Wse-Rb-mx2" secondAttribute="centerY" id="R6n-hH-h3G"/>
+                        <constraint firstAttribute="bottom" secondItem="lsa-86-l1Z" secondAttribute="bottom" id="VEG-KP-s3p"/>
+                        <constraint firstAttribute="height" constant="50" id="eF3-aw-FfP"/>
+                        <constraint firstItem="lsa-86-l1Z" firstAttribute="leading" secondItem="Wse-Rb-mx2" secondAttribute="leading" constant="10" id="ph2-NJ-Yej"/>
+                        <constraint firstAttribute="trailing" secondItem="ki6-so-ElM" secondAttribute="trailing" constant="10" id="rWz-Tj-itr"/>
+                        <constraint firstItem="7mD-B8-w3h" firstAttribute="leading" secondItem="Wse-Rb-mx2" secondAttribute="leading" constant="10" id="vl7-gf-xvP"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Xvr-6t-Gui" appends="YES" id="3YN-Kn-Zy8"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Vgu-ke-7K4" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="Fg8-3J-NbO"/>
                 <constraint firstItem="Vg0-fY-peG" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="Ixa-NA-6tj"/>
+                <constraint firstItem="Vg0-fY-peG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="JzA-Xa-Avh"/>
+                <constraint firstAttribute="trailing" secondItem="Vg0-fY-peG" secondAttribute="trailing" id="LAD-l0-YzS"/>
                 <constraint firstItem="Vgu-ke-7K4" firstAttribute="top" secondItem="Q2Z-Jv-5Ix" secondAttribute="bottom" id="PgX-nj-NaX"/>
+                <constraint firstAttribute="trailing" secondItem="Wse-Rb-mx2" secondAttribute="trailing" id="R2P-pV-Yol"/>
                 <constraint firstItem="Vgu-ke-7K4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TGq-84-4QH"/>
-                <constraint firstItem="Q2Z-Jv-5Ix" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Ued-5w-ZnR"/>
-                <constraint firstItem="Vg0-fY-peG" firstAttribute="top" secondItem="Vgu-ke-7K4" secondAttribute="bottom" id="Xva-2u-Hwd"/>
                 <constraint firstItem="Q2Z-Jv-5Ix" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cId-Qg-t9J"/>
+                <constraint firstItem="Wse-Rb-mx2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fJn-lD-d6b"/>
                 <constraint firstAttribute="trailing" secondItem="Q2Z-Jv-5Ix" secondAttribute="trailing" id="jB6-4Z-01b"/>
+                <constraint firstItem="Wse-Rb-mx2" firstAttribute="top" secondItem="Vg0-fY-peG" secondAttribute="bottom" id="nBU-9n-RDy"/>
+                <constraint firstItem="Q2Z-Jv-5Ix" firstAttribute="top" secondItem="Wse-Rb-mx2" secondAttribute="bottom" id="t7Z-gv-Uob"/>
+                <constraint firstItem="Vg0-fY-peG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xy3-mN-Mvf"/>
                 <constraint firstItem="Vg0-fY-peG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yz3-f8-N3T"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -160,14 +205,19 @@
                 <action selector="modifyPwd:" destination="-1" id="FJz-8h-u9r"/>
             </connections>
         </tapGestureRecognizer>
-        <tapGestureRecognizer id="1gg-91-lJO" userLabel="银行卡绑定">
+        <tapGestureRecognizer id="1gg-91-lJO" userLabel="手机号修改">
             <connections>
-                <action selector="bankCardBang:" destination="-1" id="s1u-Z5-SJd"/>
+                <action selector="phoneNumModify:" destination="-1" id="sgB-Kj-KJc"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="I8B-bL-pJU" userLabel="二级密码修改">
             <connections>
                 <action selector="secondPwdModify:" destination="-1" id="PMA-fe-8NB"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="Xvr-6t-Gui" userLabel="忘记密码">
+            <connections>
+                <action selector="forgetPassword:" destination="-1" id="lsV-Z7-aO9"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

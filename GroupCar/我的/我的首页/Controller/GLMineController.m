@@ -8,9 +8,15 @@
 
 #import "GLMineController.h"
 #import "LCStarRatingView.h"
-#import "GLMine_Set.h"
 #import "GLMine_Cell.h"
+#import "GLMine_SetController.h"
+#import "GLMine_Set.h"//设置
 #import "GLMine_PersonInfoController.h"//个人信息
+#import "GLMine_MessageController.h"//消息
+#import "GLMine_RecommendController.h"//推荐好友
+#import "GLMine_MyExchangeController.h"//我要兑换
+#import "GLMine_AchieveController.h"//我的业绩
+#import "GLMine_RechargeController.h"//充值
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -65,7 +71,12 @@
 
 #pragma mark - 消息
 - (IBAction)message:(id)sender {
-    NSLog(@"消息");
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_MessageController *messageVC = [[GLMine_MessageController alloc] init];
+    messageVC.navigationItem.title = @"消息";
+    [self.navigationController pushViewController:messageVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 #pragma mark - 个人信息
@@ -81,17 +92,35 @@
 - (IBAction)becomeDelegate:(id)sender {
     NSLog(@"个人代理商");
 }
+
 #pragma mark - 我的业绩
 - (IBAction)myAchievement:(id)sender {
-    NSLog(@"我的业绩");
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_AchieveController *achieveVC = [[GLMine_AchieveController alloc] init];
+    achieveVC.navigationItem.title = @"我的业绩";
+    [self.navigationController pushViewController:achieveVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
+
 #pragma mark - 我要充值
 - (IBAction)recharge:(id)sender {
-    NSLog(@"我要充值");
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_RechargeController *rechargeVC = [[GLMine_RechargeController alloc] init];
+    rechargeVC.navigationItem.title = @"充值";
+    [self.navigationController pushViewController:rechargeVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
+
 #pragma mark - 我要兑换
 - (IBAction)exchange:(id)sender {
-    NSLog(@"我要兑换");
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_MyExchangeController *exchangeVC = [[GLMine_MyExchangeController alloc] init];
+    exchangeVC.navigationItem.title = @"我要兑换";
+    [self.navigationController pushViewController:exchangeVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 #pragma mark ---------UITableViewDelegate
@@ -121,12 +150,14 @@
     switch (indexPath.row) {
         case 0:
         {
-            NSLog(@"推荐好友");
+            GLMine_RecommendController *recommendVC = [[GLMine_RecommendController alloc] init];
+            recommendVC.navigationItem.title = @"推荐好友";
+            [self.navigationController pushViewController:recommendVC animated:YES];
         }
             break;
         case 1:
         {
-            GLMine_Set * setVC = [[GLMine_Set alloc] init];
+            GLMine_SetController * setVC = [[GLMine_SetController alloc] init];
             setVC.navigationItem.title = @"设置";
             [self.navigationController pushViewController:setVC animated:YES];
         }
@@ -154,7 +185,7 @@
 
 - (NSArray *)imageArr{
     if (!_imageArr) {
-        _imageArr = @[@"phone-Sign",@"phone-Sign",@"phone-Sign"];
+        _imageArr = @[@"推荐好友",@"Setup",@"实名认证"];
     }
     return _imageArr;
 }

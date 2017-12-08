@@ -17,7 +17,7 @@
     // 创建一个SessionManager管理对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[self customSecurityPolicy]];
+//    [manager setSecurityPolicy:[self customSecurityPolicy]];
     
     // 指定我们能够解析的数据类型包含html.支持返回类型
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
@@ -44,29 +44,32 @@
     
     [manager POST:urlStr1 parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        switch ([responseObject[@"code"] integerValue]) {
-            case SUCCESS_CODE:
-                finish(responseObject);
-                break;
-            case PAGE_ERROR_CODE:
-                finish(responseObject);
-//                [MBProgressHUD showError:@"没有更多数据了"];
-                break;
-            case ERROR_CODE:
-//                [MBProgressHUD showSuccess:@"token错误"];
-                finish(responseObject);
-                break;
-            case LOGIC_ERROR_CODE:
-                finish(responseObject);
-                break;
-            case OVERDUE_CODE:
-//                [MBProgressHUD showSuccess:@"未登录请登录账户返回"];
-                finish(responseObject);
-                break;
-                
-            default:
-                break;
-        }
+        finish(responseObject);
+        
+//        switch ([responseObject[@"code"] integerValue]) {
+//            case SUCCESS_CODE:
+//                finish(responseObject);
+//                break;
+//            case PAGE_ERROR_CODE:
+//                finish(responseObject);
+////                [MBProgressHUD showError:@"没有更多数据了"];
+//                break;
+//            case ERROR_CODE:
+////                [MBProgressHUD showSuccess:@"token错误"];
+//                finish(responseObject);
+//                break;
+//            case LOGIC_ERROR_CODE:
+//                finish(responseObject);
+//                break;
+//            case OVERDUE_CODE:
+////                [MBProgressHUD showSuccess:@"未登录请登录账户返回"];
+//                finish(responseObject);
+//                break;
+//
+//            default:
+//                finish(responseObject);
+//                break;
+//        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

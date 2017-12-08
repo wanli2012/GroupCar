@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Lk-cO-Yzt">
@@ -39,19 +39,28 @@
                             <constraint firstAttribute="height" constant="1" id="yVA-9b-d9f"/>
                         </constraints>
                     </view>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Luh-il-4Dd">
+                        <rect key="frame" x="274.5" y="13.5" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Luh-il-4Dd" secondAttribute="trailing" constant="10" id="6Xq-JJ-cAO"/>
                     <constraint firstItem="9Lk-cO-Yzt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IeL-YF-4Qg"/>
                     <constraint firstAttribute="trailing" secondItem="Uyp-Kf-zGd" secondAttribute="trailing" id="KAC-iX-xK5"/>
                     <constraint firstAttribute="trailing" secondItem="0dO-ma-DqG" secondAttribute="trailing" constant="15" id="Nun-cj-Tpy"/>
                     <constraint firstItem="0dO-ma-DqG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WQq-cQ-eEH"/>
                     <constraint firstItem="9Lk-cO-Yzt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bpT-WY-TJg"/>
                     <constraint firstAttribute="bottom" secondItem="Uyp-Kf-zGd" secondAttribute="bottom" id="gcL-gB-jJv"/>
+                    <constraint firstItem="Luh-il-4Dd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jyT-cB-ba0"/>
                     <constraint firstItem="Uyp-Kf-zGd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="yFk-rX-dae"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="detailLabel" destination="Luh-il-4Dd" id="HXT-HN-Ltr"/>
                 <outlet property="titleLabel" destination="9Lk-cO-Yzt" id="ApQ-B7-RDD"/>
             </connections>
         </tableViewCell>

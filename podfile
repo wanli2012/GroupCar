@@ -11,6 +11,7 @@ pod 'MJRefresh'
 pod 'SDCycleScrollView', '~> 1.64'
 pod 'MJExtension'
 pod 'FMDB'
+pod 'WechatOpenSDK', '~> 1.8.0'
 
 end
 

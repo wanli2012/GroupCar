@@ -165,7 +165,7 @@
         _cycleScrollView.localizationImageNamesGroup = @[[UIImage imageNamed:@"timg"],[UIImage imageNamed:@"timg"],[UIImage imageNamed:@"timg"],[UIImage imageNamed:@"timg"]];
         
         _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
-        _cycleScrollView.placeholderImageContentMode = UIViewContentModeScaleToFill;
+        _cycleScrollView.placeholderImageContentMode = UIViewContentModeScaleAspectFill;
         _cycleScrollView.autoScrollTimeInterval = 2;// 自动滚动时间间隔
         _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;// 翻页 右下角
         _cycleScrollView.titleLabelBackgroundColor = [UIColor groupTableViewBackgroundColor];// 图片对应的标题的 背景色。（因为没有设标题）

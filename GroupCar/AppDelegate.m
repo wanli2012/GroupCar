@@ -38,7 +38,6 @@
         self.window.rootViewController = [[yindaotuViewController alloc]init];
     }
 
-
     return YES;
 }
 

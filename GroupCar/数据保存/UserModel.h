@@ -23,7 +23,10 @@
 @property (nonatomic, copy)NSString  *token;//用户令牌 ras加密
 @property (nonatomic, copy)NSString  *uname;//用户平台分配账号
 @property (nonatomic, copy)NSString  *user_id;//用户id ras加密
-
+@property (nonatomic, copy)NSString  *dz_name;//大众账号
+@property (nonatomic, copy)NSString  *truename;//真实姓名
+@property (nonatomic, copy)NSString  *idcard;//身份证号码
+@property (nonatomic, copy)NSString  *u_group;//1代表用户还是会员 2是个人代理
 
 
 +(UserModel*)defaultUser;

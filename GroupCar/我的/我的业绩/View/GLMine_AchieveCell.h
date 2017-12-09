@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_AchieveModel.h"
 
 @interface GLMine_AchieveCell : UITableViewCell
+
+@property (nonatomic, strong)GLMine_AchieveModel *model;
 
 @end

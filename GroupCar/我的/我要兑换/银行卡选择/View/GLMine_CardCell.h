@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_CardModel.h"
 
 @interface GLMine_CardCell : UITableViewCell
+
+@property (nonatomic, strong)GLMine_CardModel *model;
 
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;

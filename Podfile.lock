@@ -22,13 +22,23 @@ PODS:
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
-  - SDCycleScrollView (1.65):
-    - SDWebImage (~> 3.7)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
+  - SDCycleScrollView (1.73):
+    - SDWebImage (~> 4.0.0)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - SVProgressHUD (2.1.2)
-  - WechatOpenSDK (1.8.0)
+  - UMengAnalytics-NO-IDFA (4.2.5)
+  - UMengUShare/Core (6.4.7):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.7)
+  - UMengUShare/Social/ReducedWeChat (6.4.7):
+    - UMengUShare/Core
+  - UMengUShare/Social/WeChat (6.4.7):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedWeChat
+  - UMengUShare/UI (6.4.7):
+    - UMengUShare/Core
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -38,10 +48,11 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.0.0)
   - MJExtension
   - MJRefresh
-  - SDCycleScrollView (~> 1.64)
-  - SDWebImage (~> 3.8)
+  - SDCycleScrollView (~> 1.66)
   - SVProgressHUD
-  - WechatOpenSDK (~> 1.8.0)
+  - UMengAnalytics-NO-IDFA
+  - UMengUShare/Social/WeChat
+  - UMengUShare/UI
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -51,11 +62,12 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SDCycleScrollView: d0fd5fe40a80918371fd8939214eb3be81033d83
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
-  WechatOpenSDK: 0ee07a8d492299d3e47372a33da5af26524a7576
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
+  UMengUShare: 5055d0e01c844379e173bdca0840fc9fa9297d88
 
-PODFILE CHECKSUM: 4f0f4a72a259a0c6b37a305dd4b05108a12a7ad8
+PODFILE CHECKSUM: 547e31513397aae95b914841007f6b03d432a9ff
 
 COCOAPODS: 1.2.0

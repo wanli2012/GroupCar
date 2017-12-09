@@ -15,6 +15,7 @@
 {
      BOOL _ishidecotr;//判断是否隐藏弹出控制器
 }
+
 @property (weak, nonatomic) IBOutlet UIView *ownerView;
 @property (weak, nonatomic) IBOutlet UIView *bankView;
 @property (weak, nonatomic) IBOutlet UIView *numberView;
@@ -26,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
+
+@property (nonatomic, copy)NSString *bank_id;//银行名id
+@property (strong, nonatomic)LoadWaitView *loadV;
 
 @end
 
@@ -52,6 +56,38 @@
     self.addressView.layer.cornerRadius = 5.f;
     self.addressView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     self.addressView.layer.borderWidth = 1.f;
+
+}
+#pragma mark - 添加银行卡
+- (IBAction)submit:(id)sender {
+    if(self){
+        
+    }
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].user_id;
+    dict[@"type"] = @"2";
+    dict[@"bank"] = self.bank_id;
+    dict[@"cardnumber"] = self.numberTF.text;
+    dict[@"address"] = self.addressTF.text;
+    
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:KGet_BankCard_Interface paramDic:dict finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+           
+            [self.navigationController popViewControllerAnimated:YES];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
 }
 
 #pragma mark - 银行选择

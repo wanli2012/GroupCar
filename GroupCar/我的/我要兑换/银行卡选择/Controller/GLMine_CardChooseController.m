@@ -9,10 +9,16 @@
 #import "GLMine_CardChooseController.h"
 #import "GLMine_CardCell.h"
 #import "GLMine_AddCardController.h"
+#import "GLMine_CardModel.h"
 
 @interface GLMine_CardChooseController ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
+
+@property (strong, nonatomic)LoadWaitView *loadV;
+@property (nonatomic, strong)NSMutableArray *models;
+//@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -22,12 +28,46 @@
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_CardCell" bundle:nil] forCellReuseIdentifier:@"GLMine_CardCell"];
+//    [self.tableView addSubview:self.nodataV];
+//    self.nodataV.hidden = YES;
     
     self.addBtn.layer.cornerRadius = 5.f;
+    
+    [self postRequest];
+}
+
+#pragma mark - 请求数据
+- (void)postRequest {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].user_id;
+    
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:KGet_BankCard_Interface paramDic:dict finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            [self.models removeAllObjects];
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                GLMine_CardModel *model = [GLMine_CardModel mj_objectWithKeyValues:dic];
+                [self.models addObject:model];
+            }
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+        [self.tableView reloadData];
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
 }
 
 #pragma mark - 添加银行卡
 - (IBAction)addBankCard:(id)sender {
+    
     self.hidesBottomBarWhenPushed = YES;
     GLMine_AddCardController *addVC = [[GLMine_AddCardController alloc] init];
     addVC.navigationItem.title = @"银行卡绑定";
@@ -38,7 +78,8 @@
 #pragma mark - UITableViewDelegate UITalbeViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+
+    return self.models.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -52,9 +93,9 @@
     return 80;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    GLMine_CardCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    Wallet_back_info *model = self.models[indexPath.row];
-    self.block(cell.bankNameLabel.text,cell.numberLabel.text,@"1");
+    
+    GLMine_CardModel *model = self.models[indexPath.row];
+    self.block(model.bank_name,model.bank_num,model.bank_id);
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -145,5 +186,12 @@
 //
 //    }];
 //}
+#pragma mark - 懒加载
+- (NSMutableArray *)models{
+    if (!_models) {
+        _models = [NSMutableArray array];
+    }
+    return _models;
+}
 
 @end

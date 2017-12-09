@@ -22,5 +22,12 @@
     self.picImageV.layer.cornerRadius = self.picImageV.height /2 ;
 }
 
+- (void)setModel:(GLMine_CardModel *)model{
+    _model = model;
+    
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.icon] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.bankNameLabel.text = model.bank_name;
+    self.numberLabel.text = model.bank_num;
+}
 
 @end

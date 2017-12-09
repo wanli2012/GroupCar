@@ -34,6 +34,11 @@
 #define NO_ACCOUNT_CODE 109
 
 
+//占位图
+#define PlaceHolderImage @"爱车"
+
+#define Share_URL @"http://www.baidu.com"
+
 #define BaseURL @"http://192.168.0.149/car/App/"
 #define KRegister @"User/PartnerRegister" //注册
 #define KGet_Code_Interface @"User/PartneVerificationCode"//验证码
@@ -42,5 +47,14 @@
 #define KChangePassword_Interface @"User/PartnerCryptogram"//用户修改密码 忘记密码修改
 #define KSetSecond_Password_Interface @"User/PartnerUserPay"//用户设置二级密码
 #define KChange_Phone_Interface @"User/ParterUserPhone"//用户更改账户手机号
+#define KTrueName_Interface @"User/PartnerUserTruename"//用户实名认证
+#define KInfoChange_Interface @"User/PartnerInformation"//用户个人信息修改
+#define KMyInfo_Interface @"User/PartnerUser"//我的信息
+#define KAchievement_Interface @"User/PartnerUserAchievement"//用户业绩
+#define KDel_Message_Interface @"User/PartnerUserMessageDel"//删除消息
+#define KJifen_Exchange_Interface @"User/PartnerUserConvertibility"//用户积分兑换
+#define KGet_BankCard_Interface @"User/PartnerUserBank"//获取用户的银行卡
+#define KAdd_bankCard_Interface @"User/PartnerUserAddBank"//用户添加银行卡
+
 
 #endif /* Const_h */

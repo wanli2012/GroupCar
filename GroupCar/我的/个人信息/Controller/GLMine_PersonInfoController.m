@@ -7,17 +7,21 @@
 //
 
 #import "GLMine_PersonInfoController.h"
+#import "GLMine_PersonInfoModel.h"
 
 @interface GLMine_PersonInfoController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *IDLabel;
-@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
 @property (weak, nonatomic) IBOutlet UILabel *recommendIDLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
+
+@property (strong, nonatomic)LoadWaitView *loadV;
+@property (nonatomic, strong)GLMine_PersonInfoModel *model;
 
 @end
 
@@ -31,9 +35,98 @@
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = kSCREEN_HEIGHT - 64;
 
+    [self postRequest];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+}
+
+- (void)postRequest {
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].user_id;
+    dict[@"type"] = @"1";
+
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:KInfoChange_Interface paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            if ([responseObject[@"data"] count] != 0) {
+                
+                self.model = [GLMine_PersonInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
+            }
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        [self refresh];
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+
+}
+- (void)refresh{
+    
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:self.model.portrait] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    self.nameLabel.text = self.model.nickname;
+    self.IDLabel.text = self.model.uname;
+    self.recommendLabel.text = self.model.gnickname;
+    self.recommendIDLabel.text = self.model.gname;
+    
+}
+#pragma mark - 修改昵称
+- (IBAction)changeNickName:(id)sender {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"昵称修改" message:@"请输入你想要的昵称?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = @"请输入昵称";
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if(alertVC.textFields.lastObject.text.length == 0){
+            
+            return;
+        }
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"token"] = [UserModel defaultUser].token;
+        dict[@"uid"] = [UserModel defaultUser].user_id;
+        dict[@"type"] = @"2";
+        dict[@"user_name"] = alertVC.textFields.lastObject.text;
+        
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:KInfoChange_Interface paramDic:dict finish:^(id responseObject) {
+            
+            [_loadV removeloadview];
+            
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+                self.model.nickname = alertVC.textFields.lastObject.text;
+                [self refresh];
+                
+            }else{
+                
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
+            
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+        }];
+        
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 #pragma mark - 修改头像
@@ -99,48 +192,47 @@
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"token"] = [UserModel defaultUser].token;
         dict[@"uid"] = [UserModel defaultUser].user_id;
-        dict[@"type"] = @"1";
+        dict[@"type"] = @"2";
         
-//        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-//        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//        manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
-//        manager.requestSerializer.timeoutInterval = 10;
-//        // 加上这行代码，https ssl 验证。
-//        [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
-//        [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kUSER_INFO_SAVE_URL] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//            //将图片以表单形式上传
-//
-//            if (picImage) {
-//
-//                NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-//                formatter.dateFormat=@"yyyyMMddHHmmss";
-//                NSString *str=[formatter stringFromDate:[NSDate date]];
-//                NSString *fileName=[NSString stringWithFormat:@"%@.png",str];
-//                NSData *data = UIImagePNGRepresentation(picImage);
-//                [formData appendPartWithFileData:data name:@"pic" fileName:fileName mimeType:@"image/png"];
-//            }
-//
-//        }progress:^(NSProgress *uploadProgress){
-//
-//        }success:^(NSURLSessionDataTask *task, id responseObject) {
-//            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//
-//            if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
-//
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
+        manager.requestSerializer.timeoutInterval = 10;
+        // 加上这行代码，https ssl 验证。
+        [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+        [manager POST:[NSString stringWithFormat:@"%@%@",BaseURL,KInfoChange_Interface] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            //将图片以表单形式上传
+
+            if (picImage) {
+
+                NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+                formatter.dateFormat=@"yyyyMMddHHmmss";
+                NSString *str=[formatter stringFromDate:[NSDate date]];
+                NSString *fileName=[NSString stringWithFormat:@"%@.png",str];
+                NSData *data = UIImagePNGRepresentation(picImage);
+                [formData appendPartWithFileData:data name:@"portrait" fileName:fileName mimeType:@"image/png"];
+            }
+
+        }progress:^(NSProgress *uploadProgress){
+
+        }success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+
+            if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
                 self.picImageV.image = [UIImage imageWithData:data];
-//
-//                [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
-//
-//            }else{
-//                [SVProgressHUD showErrorWithStatus:dic[@"message"]];
-//            }
-//
-//            [_loadV removeloadview];
-//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//            [_loadV removeloadview];
-//
-//            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-//        }];
+
+                [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
+
+            }else{
+                [SVProgressHUD showErrorWithStatus:dic[@"message"]];
+            }
+
+            [_loadV removeloadview];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [_loadV removeloadview];
+
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
 //
         [picker dismissViewControllerAnimated:YES completion:nil];
     }

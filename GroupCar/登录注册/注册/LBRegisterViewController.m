@@ -97,7 +97,12 @@
     self.navigationController.navigationBar.hidden = YES;
 }
 
-#pragma mark - 注册协议
+#pragma mark - 跳转到注册协议
+- (IBAction)pushToProtocol:(id)sender {
+    NSLog(@"跳转到注册协议");
+}
+
+#pragma mark - 是否同意注册协议
 - (IBAction)isAgreeProtocol:(id)sender {
     _isAgreeProtocol = !_isAgreeProtocol;
     if (_isAgreeProtocol) {
@@ -192,10 +197,13 @@
         [SVProgressHUD showErrorWithStatus:@"验证码输入不正确"];
         return;
     }
+    if(!_isAgreeProtocol){
+        [SVProgressHUD showErrorWithStatus:@"请同意注册协议"];
+        return;
+    }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[@"Referee"] = self.phoneTF.text;
-//    dict[@"appid"] = encryptsecret;
+    dict[@"Referee"] = self.recommendTF.text;
     dict[@"type"] = @"1";
     dict[@"agreement"] = @"1";
     dict[@"userphone"] = self.phoneTF.text;

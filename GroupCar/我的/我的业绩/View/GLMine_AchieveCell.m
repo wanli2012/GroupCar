@@ -8,6 +8,15 @@
 
 #import "GLMine_AchieveCell.h"
 
+@interface GLMine_AchieveCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *jifenLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+
+@end
+
 @implementation GLMine_AchieveCell
 
 - (void)awakeFromNib {
@@ -15,10 +24,19 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setModel:(GLMine_AchieveModel *)model{
+    _model = model;
+    
+    NSString * timeStampString = model.addtime;
+    NSTimeInterval _interval=[timeStampString doubleValue];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+    NSDateFormatter *objDateformat = [[NSDateFormatter alloc] init];
+    [objDateformat setDateFormat:@"yyyy-MM-dd"];
 
-    // Configure the view for the selected state
+    
+    self.dateLabel.text = [objDateformat stringFromDate: date];
+    self.accountLabel.text = model.uname;
+    self.moneyLabel.text = model.money;
+    self.jifenLabel.text = model.mark;
 }
-
 @end

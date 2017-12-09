@@ -274,11 +274,15 @@
                                                 <constraint firstAttribute="height" constant="11" id="ymY-N8-rXE"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="《注册协议》" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpL-WT-Hzl">
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="《注册协议》" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpL-WT-Hzl">
                                             <rect key="frame" x="26" y="13.5" width="74" height="14.5"/>
+                                            <gestureRecognizers/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.40858465430000002" green="0.40212076899999999" blue="0.9351471066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="pvQ-Gl-n0T" appends="YES" id="dA1-pq-YYe"/>
+                                            </connections>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -351,9 +355,14 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="19.5" y="-255.5"/>
         </view>
-        <tapGestureRecognizer id="VBF-mQ-uVF" userLabel="注册协议">
+        <tapGestureRecognizer id="VBF-mQ-uVF" userLabel="是否同意注册协议">
             <connections>
                 <action selector="isAgreeProtocol:" destination="-1" id="4Y7-z1-2sc"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="pvQ-Gl-n0T" userLabel="跳转到注册协议">
+            <connections>
+                <action selector="pushToProtocol:" destination="-1" id="aJl-m2-Zn8"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

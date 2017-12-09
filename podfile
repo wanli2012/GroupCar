@@ -3,15 +3,22 @@ use_frameworks!
 target 'GroupCar' do 
 pod 'AFNetworking', '~> 3.0' 
 pod 'MBProgressHUD', '~> 1.0.0'
-pod 'SDWebImage', '~>3.8'
 pod 'Masonry'
 pod 'SVProgressHUD'
 pod 'IQKeyboardManager'
 pod 'MJRefresh'
-pod 'SDCycleScrollView', '~> 1.64'
+pod 'SDCycleScrollView', '~> 1.66'
 pod 'MJExtension'
 pod 'FMDB'
-pod 'WechatOpenSDK', '~> 1.8.0'
+#pod 'WechatOpenSDK', '~> 1.8.0'
+
+# U-Share SDK UI模块（分享面板，建议添加）
+pod 'UMengUShare/UI'
+# 集成微信(完整版14.4M)
+pod 'UMengUShare/Social/WeChat'
+# 无IDFA版 统计
+pod 'UMengAnalytics-NO-IDFA'
+
 
 end
 

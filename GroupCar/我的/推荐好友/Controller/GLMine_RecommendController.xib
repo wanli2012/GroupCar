@@ -11,16 +11,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMine_RecommendController">
             <connections>
+                <outlet property="myAchieveMent" destination="0BX-Ff-KSQ" id="bsF-gb-xDX"/>
+                <outlet property="picImageV" destination="fSn-Pt-prP" id="0pp-bU-Rfd"/>
+                <outlet property="shareBtn" destination="Hls-h6-LsF" id="nuh-pC-HVC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="284" height="472"/>
+            <rect key="frame" x="0.0" y="0.0" width="294" height="512"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fSn-Pt-prP">
-                    <rect key="frame" x="47" y="111" width="190" height="190"/>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fSn-Pt-prP">
+                    <rect key="frame" x="52" y="81" width="190" height="190"/>
                     <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="190" id="1Ii-Xo-650"/>
@@ -28,7 +31,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hls-h6-LsF">
-                    <rect key="frame" x="22" y="351" width="240" height="45"/>
+                    <rect key="frame" x="27" y="321" width="240" height="45"/>
                     <color key="backgroundColor" red="0.40471929311752319" green="0.39854219555854797" blue="0.92319291830062866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="RLY-Zx-qUm"/>
@@ -36,17 +39,33 @@
                     </constraints>
                     <state key="normal" title="长按点击分享"/>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BX-Ff-KSQ">
+                    <rect key="frame" x="27" y="386" width="240" height="45"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="6Zb-9l-gNd"/>
+                        <constraint firstAttribute="width" constant="240" id="pI7-ZE-z7u"/>
+                    </constraints>
+                    <state key="normal" title="我的业绩">
+                        <color key="titleColor" red="0.43640613560000002" green="0.43185442689999998" blue="0.92671686409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="myAchieve:" destination="-1" eventType="touchUpInside" id="5vD-ri-ZEO"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Hls-h6-LsF" firstAttribute="top" secondItem="fSn-Pt-prP" secondAttribute="bottom" constant="50" id="AHX-LB-FO8"/>
+                <constraint firstItem="0BX-Ff-KSQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KTv-LR-QD6"/>
+                <constraint firstItem="0BX-Ff-KSQ" firstAttribute="top" secondItem="Hls-h6-LsF" secondAttribute="bottom" constant="20" id="fo6-dH-tUm"/>
                 <constraint firstItem="Hls-h6-LsF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="lXD-SF-ti8"/>
-                <constraint firstItem="fSn-Pt-prP" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-30" id="xz9-wF-WO0"/>
+                <constraint firstItem="fSn-Pt-prP" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-80" id="xz9-wF-WO0"/>
                 <constraint firstItem="fSn-Pt-prP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="z4L-so-lwA"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="14" y="44"/>
+            <point key="canvasLocation" x="19" y="64"/>
         </view>
     </objects>
 </document>

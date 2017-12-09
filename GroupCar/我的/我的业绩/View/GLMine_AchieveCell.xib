@@ -64,6 +64,12 @@
                     <constraint firstItem="dMz-vO-5Jr" firstAttribute="top" secondItem="Z45-Qm-d3l" secondAttribute="bottom" constant="10" id="uw0-4r-F8f"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="accountLabel" destination="dMz-vO-5Jr" id="gjd-XV-KwU"/>
+                <outlet property="dateLabel" destination="Z45-Qm-d3l" id="mmx-9d-f7g"/>
+                <outlet property="jifenLabel" destination="boH-yF-7PA" id="G6R-2v-V6p"/>
+                <outlet property="moneyLabel" destination="oCk-tf-sOf" id="0ev-vB-s7R"/>
+            </connections>
             <point key="canvasLocation" x="35.5" y="65.5"/>
         </tableViewCell>
     </objects>

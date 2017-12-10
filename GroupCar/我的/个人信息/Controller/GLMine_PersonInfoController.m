@@ -35,6 +35,7 @@
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = kSCREEN_HEIGHT - 64;
 
+    [self refresh];
     [self postRequest];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -71,7 +72,10 @@
 }
 - (void)refresh{
     
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:self.model.portrait] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:self.model.portrait] placeholderImage:[UIImage imageNamed:@"Headportrait"]];
+    if (self.picImageV.image == nil) {
+        self.picImageV.image = [UIImage imageNamed:@"Headportrait"];
+    }
     self.nameLabel.text = self.model.nickname;
     self.IDLabel.text = self.model.uname;
     self.recommendLabel.text = self.model.gnickname;

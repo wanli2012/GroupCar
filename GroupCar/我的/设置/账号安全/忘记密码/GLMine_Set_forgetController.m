@@ -92,16 +92,24 @@
 }
 
 - (IBAction)submit:(id)sender {
+    if (self.type == 2) {
+        if (self.pwdTF.text.length != 6) {
+            [SVProgressHUD showErrorWithStatus:@"请设置6位纯数字二级密码"];
+            return;
+        }
+
+    }else{
+        if (self.pwdTF.text.length < 6 || self.pwdTF.text.length > 16) {
+            [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
+            return;
+        }
+        
+        if (self.ensurePasswordTF.text.length < 6 || self.ensurePasswordTF.text.length > 16) {
+            [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
+            return;
+        }
+    }
     
-    if (self.pwdTF.text.length < 6 || self.pwdTF.text.length > 16) {
-        [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
-        return;
-    }
-  
-    if (self.ensurePasswordTF.text.length < 6 || self.ensurePasswordTF.text.length > 16) {
-        [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
-        return;
-    }
     if (self.codeTF.text.length < 4 ) {
         [SVProgressHUD showErrorWithStatus:@"请输入4位的验证码"];
         return;
@@ -194,24 +202,40 @@
             return NO;
         }
     }
+    
     //限制长度
-    if(textField == self.pwdTF){
-        if (textField.text.length >= 16) {
-            textField.text = [textField.text substringToIndex:16];
-            [SVProgressHUD showErrorWithStatus:@"密码最多16位"];
-            return NO;
+    if (self.type == 2) {
+        if(textField == self.pwdTF){
+            if (textField.text.length >= 6) {
+                textField.text = [textField.text substringToIndex:6];
+                [SVProgressHUD showErrorWithStatus:@"二级密码只能为6位顺数字"];
+                return NO;
+            }
+            
+        }else if(textField == self.ensurePasswordTF){
+            if (textField.text.length >= 6) {
+                textField.text = [textField.text substringToIndex:6];
+            }
         }
         
-    }else if(textField == self.ensurePasswordTF){
-        if (textField.text.length >= 16) {
-            textField.text = [textField.text substringToIndex:16];
-        }
-        
-    }else if(textField == self.codeTF){
-        if (textField.text.length > 4) {
-            textField.text = [textField.text substringToIndex:4];
-            [SVProgressHUD showErrorWithStatus:@"验证码为4位"];
-            return NO;
+    }else{
+        if(textField == self.pwdTF){
+            if (textField.text.length >= 16) {
+                textField.text = [textField.text substringToIndex:16];
+                [SVProgressHUD showErrorWithStatus:@"密码最多16位"];
+                return NO;
+            }
+        }else if(textField == self.ensurePasswordTF){
+            if (textField.text.length >= 16) {
+                textField.text = [textField.text substringToIndex:16];
+            }
+            
+        }else if(textField == self.codeTF){
+            if (textField.text.length > 4) {
+                textField.text = [textField.text substringToIndex:4];
+                [SVProgressHUD showErrorWithStatus:@"验证码为4位"];
+                return NO;
+            }
         }
     }
     return YES;

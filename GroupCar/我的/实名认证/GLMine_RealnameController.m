@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.submitBtn.layer.borderColor = kMain_Color.CGColor;
     self.submitBtn.layer.borderWidth = 1.f;
     self.submitBtn.layer.cornerRadius = 5.f;
@@ -41,6 +42,12 @@
         self.IDTF.textColor = [UIColor darkGrayColor];
         self.nameTF.textColor = [UIColor darkGrayColor];
         self.identifyTF.textColor = [UIColor darkGrayColor];
+        
+        self.submitBtn.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        [self.submitBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [self.submitBtn setTitle:@"已认证" forState:UIControlStateNormal];
+        
+        self.submitBtn.enabled = NO;
     }
     
 }
@@ -74,7 +81,7 @@
     dict[@"uid"] = [UserModel defaultUser].user_id;
     dict[@"type"] = @"2";
     dict[@"username"] = self.nameTF.text;
-    dict[@"idcard"] = self.identifyTF.text;
+    dict[@"idcard"] = self.identifyTF.text.uppercaseString;
     dict[@"dzname"] = self.IDTF.text;
     
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
@@ -87,7 +94,7 @@
             [UserModel defaultUser].status = @"2";//用户是否实名认证 1未认证 2已认证
             [UserModel defaultUser].dz_name = self.IDTF.text;
             [UserModel defaultUser].truename = self.nameTF.text;
-            [UserModel defaultUser].idcard = self.identifyTF.text;
+            [UserModel defaultUser].idcard = self.identifyTF.text.uppercaseString;
 
             [usermodelachivar achive];
             

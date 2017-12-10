@@ -14,7 +14,11 @@
 #import "BaseNavigationViewController.h"
 #import <Foundation/NSJSONSerialization.h>
 
+#import <UMSocialCore/UMSocialCore.h>
+#import "UMMobClick/MobClick.h"
+
 @interface AppDelegate ()
+
 @end
 
 @implementation AppDelegate
@@ -22,11 +26,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [WXApi registerApp:@"wx3719a66cd8983420"];
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    /* 打开调试日志 */
+    [[UMSocialManager defaultManager] openLog:YES];
+    /* 设置友盟appkey */
+    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_APPKEY];
+    
+    [self configUSharePlatforms];
+    
+    [self confitUShareSettings];
+    
+    //统计集成
+    UMConfigInstance.appKey = USHARE_APPKEY;
+    UMConfigInstance.channelId = @"App Store";
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK
+    
+//    [WXApi registerApp:WEIXIN_APPKEY];
     
     BaseNavigationViewController *loginNav = [[BaseNavigationViewController alloc] initWithRootViewController:[[LBLoginViewController alloc] init]];
     self.window.rootViewController = loginNav;
@@ -40,17 +57,66 @@
 
     return YES;
 }
-
+- (void)confitUShareSettings
+{
+    /*
+     * 打开图片水印
+     */
+    //[UMSocialGlobal shareInstance].isUsingWaterMark = YES;
+    
+    /*
+     * 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
+     <key>NSAppTransportSecurity</key>
+     <dict>
+     <key>NSAllowsArbitraryLoads</key>
+     <true/>
+     </dict>
+     */
+    //[UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
+    
+}
+- (void)configUSharePlatforms
+{
+    /*
+     设置微信的appKey和appSecret
+     [微信平台从U-Share 4/5升级说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_1
+     */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WEIXIN_APPKEY appSecret:WEIXIN_APPSECRET redirectURL:nil];
+    
+    /* 支付宝的appKey */
+    //    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_AlipaySession appKey:@"2015111700822536" appSecret:nil redirectURL:nil];
+    
+}
+// 支持所有iOS系统
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
+    if (!result) {
+        // 其他如支付等SDK的回调
+       
+    }
+    return result;
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+
     return [WXApi handleOpenURL:url delegate:self];
+
 }
 
 -(void) onReq:(BaseReq*)req{
     
 }
 -(void) onResp:(SendAuthResp*)resp{
-    
-    NSLog(@"resp.code = %@  ---errorcode = %zd",resp.code,resp.state);
+
     [self getToken:resp.code];
 
 }
@@ -63,8 +129,8 @@
     
     NSString *url = @"https://api.weixin.qq.com/sns/oauth2/access_token";
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"appid"] = @"wx3719a66cd8983420";
-    dict[@"secret"] = @"4fae7202764cda777d88c9515b5ca24e";
+    dict[@"appid"] = WEIXIN_APPKEY;
+    dict[@"secret"] = WEIXIN_APPSECRET;
     dict[@"code"] = code;
     dict[@"grant_type"] = @"authorization_code";
     
@@ -135,7 +201,7 @@
     if ([context hasChanges] && ![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+//        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
 }

@@ -40,8 +40,8 @@
 
 -(void)addviewcontrol{
     
-    NSArray *titleArray = @[@"推广奖励",
-                            @"分享奖励",
+    NSArray *titleArray = @[@"分享奖励",
+                            @"代理奖励",
                             ];
     NSArray *classNames = @[
                             [GLMine_ShareAchieveController class],

@@ -11,6 +11,8 @@
 #import "GLSimpleSelectionPickerController.h"
 #import "editorMaskPresentationController.h"
 
+#import "GLBankModel.h"
+
 @interface GLMine_AddCardController ()<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning>
 {
      BOOL _ishidecotr;//判断是否隐藏弹出控制器
@@ -30,6 +32,8 @@
 
 @property (nonatomic, copy)NSString *bank_id;//银行名id
 @property (strong, nonatomic)LoadWaitView *loadV;
+@property (nonatomic, strong)NSMutableArray *bankArr;
+@property (nonatomic, strong)NSMutableArray *bankModels;
 
 @end
 
@@ -37,6 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.submitBtn.layer.cornerRadius = 5.f;
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 400;
@@ -56,13 +61,23 @@
     self.addressView.layer.cornerRadius = 5.f;
     self.addressView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     self.addressView.layer.borderWidth = 1.f;
+    
+    self.ownerTF.text = [UserModel defaultUser].truename;
 
 }
+
 #pragma mark - 添加银行卡
 - (IBAction)submit:(id)sender {
-    if(self){
-        
+    
+    if(self.numberTF.text.length < 16){
+        [SVProgressHUD showErrorWithStatus:@"银行卡输入有误"];
+        return;
     }
+    if (self.addressTF.text == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入开户行地址"];
+        return;
+    }
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     dict[@"token"] = [UserModel defaultUser].token;
@@ -73,11 +88,12 @@
     dict[@"address"] = self.addressTF.text;
     
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:KGet_BankCard_Interface paramDic:dict finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:KAdd_bankCard_Interface paramDic:dict finish:^(id responseObject) {
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
            
             [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"AddCardNotification" object:nil];
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             
         }else{
@@ -93,37 +109,39 @@
 #pragma mark - 银行选择
 - (IBAction)bankChoose:(id)sender {
     [self.view endEditing:YES];
-//    if (self.careerArr.count != 0) {
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:@[@"中国银行",@"中国建设银行",@"中国工商银行"]];
-        [self popChooser:arr Title:@"请选择银行"];
-//        return;
-//    }
-//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-//    [NetworkManager requestPOSTWithURLStr:kCV_CAREER_LIST_URL paramDic:@{} finish:^(id responseObject) {
-//        [_loadV removeloadview];
-//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-//            if([responseObject[@"data"] count] != 0){
-//
-//                [self.careerModels removeAllObjects];
-//                for (NSDictionary *dic in responseObject[@"data"]) {
-//                    GLMine_CV_CareerModel *model = [GLMine_CV_CareerModel mj_objectWithKeyValues:dic];
-//                    [self.careerModels addObject:model];
-//                }
-//                [self.careerArr removeAllObjects];
-//                for (GLMine_CV_CareerModel *model in self.careerModels) {
-//                    [self.careerArr addObject:model.name];
-//                }
-//                [self popChooser:self.careerArr Title:@"请选择职业" andIsCareer:YES];
-//            }
-//        }else{
-//
-//            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-//        }
-//
-//    } enError:^(NSError *error) {
-//        [_loadV removeloadview];
-//    }];
+    if (self.bankArr.count != 0) {
+
+        [self popChooser:self.bankArr Title:@"请选择银行"];
+        return;
+    }
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+    [NetworkManager requestPOSTWithURLStr:KGet_BankName_Interface paramDic:@{} finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+
+                [self.bankModels removeAllObjects];
+                for (NSDictionary *dic in responseObject[@"data"]) {
+                    GLBankModel *model = [GLBankModel mj_objectWithKeyValues:dic];
+                    [self.bankModels addObject:model];
+                }
+                [self.bankArr removeAllObjects];
+                for (GLBankModel *model in self.bankModels) {
+                    [self.bankArr addObject:model.bank_name];
+                }
+                [self popChooser:self.bankArr Title:@"请选择职业"];
+            }
+        }else{
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+    }];
 }
+
 #pragma mark - 弹出单项选择器
 - (void)popChooser:(NSMutableArray *)dataArr Title:(NSString *)title{
     
@@ -133,7 +151,9 @@
     __weak typeof(self)weakSelf = self;
     vc.returnreslut = ^(NSInteger index){
 
+        GLBankModel *model = weakSelf.bankModels[index];
         weakSelf.bankLabel.text = dataArr[index];
+        weakSelf.bank_id = model.id;
     };
 
     vc.transitioningDelegate = self;
@@ -162,14 +182,10 @@
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext{
     
     return 0.5;
-    
 }
 -(void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext{
     
-    
     [self chooseindustry:transitionContext];
-    
-    
 }
 -(void)chooseindustry:(id <UIViewControllerContextTransitioning>)transitionContext{
     
@@ -204,6 +220,67 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.numberTF) {
+        [self.addressTF becomeFirstResponder];
+    }else if(textField == self.addressTF){
+        [self.view endEditing:YES];
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    //限制输入字符种类
+    if (range.length == 1 && string.length == 0) {
+        
+        return YES;
+        
+    }else if(textField == self.numberTF){
+        if (![predicateModel inputShouldNumber:string]) {
+            [SVProgressHUD showErrorWithStatus:@"只能输入数字"];
+            return NO;
+        }
+    }
+    
+    //限制长度
+    if(textField == self.numberTF){
+        
+        if (textField.text.length >= 24) {
+            textField.text = [textField.text substringToIndex:24];
+            [SVProgressHUD showErrorWithStatus:@"银行卡号输入有误"];
+            
+            return NO;
+        }
+        
+    }else if(textField == self.addressTF){
+        if (textField.text.length >= 16) {
+            textField.text = [textField.text substringToIndex:11];
+            [SVProgressHUD showErrorWithStatus:@"开户行地址不能超过16字"];
+            
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)bankArr{
+    if (!_bankArr) {
+        _bankArr = [NSMutableArray array];
+    }
+    return _bankArr;
+}
+- (NSMutableArray *)bankModels{
+    if (!_bankModels) {
+        _bankModels = [NSMutableArray array];
+    }
+    return _bankModels;
+}
 
 
 @end

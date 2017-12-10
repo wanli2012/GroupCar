@@ -20,7 +20,7 @@
 #define autoSizeScaleX (kSCREEN_WIDTH/320.f)
 #define autoSizeScaleY (kSCREEN_HEIGHT/568.f)
 
-#define FONT(s)       [UIFont systemFontOfSize:s]
+#define FONT(s)  [UIFont systemFontOfSize:s]
 
 #define SUCCESS_CODE 104
 #define PAGE_ERROR_CODE 108
@@ -32,6 +32,12 @@
 #define NO_LOGIN_CODE 105
 #define LOGIN_SUCCESS_CODE 100
 #define NO_ACCOUNT_CODE 109
+
+
+#define USHARE_APPKEY @"59a772c965b6d60e730002a1"
+#define WEIXIN_APPKEY @"wx3719a66cd8983420"
+
+#define WEIXIN_APPSECRET @"4fae7202764cda777d88c9515b5ca24e"
 
 
 //占位图
@@ -51,10 +57,17 @@
 #define KInfoChange_Interface @"User/PartnerInformation"//用户个人信息修改
 #define KMyInfo_Interface @"User/PartnerUser"//我的信息
 #define KAchievement_Interface @"User/PartnerUserAchievement"//用户业绩
-#define KDel_Message_Interface @"User/PartnerUserMessageDel"//删除消息
 #define KJifen_Exchange_Interface @"User/PartnerUserConvertibility"//用户积分兑换
+#define KMoney_Exchange_Interface @"User/PartnerUserRemainingSum"//余额兑换
 #define KGet_BankCard_Interface @"User/PartnerUserBank"//获取用户的银行卡
 #define KAdd_bankCard_Interface @"User/PartnerUserAddBank"//用户添加银行卡
-
+#define KGet_BankName_Interface @"Deploy/Bank"//获取银行
+#define KExchange_Record_Interface @"User/PartnerUserEcRecord"//用户兑换记录
+#define KDel_Message_Interface @"User/PartnerUserMessageDel"//删除消息
+#define KMessage_Interface @"User/PartnerUserMessageCenter"//消息中心
+#define KGet_Delegate_Interface @"User/PartnerUserAgencyAgreement"//用户成为代理获取协议
+#define KGet_Club_Activity_Interface @"Deploy/ClubActivities"//获取俱乐部活动
+#define KGet_Collection_Interface @"User/PartnerUserCollection"//获取我的收藏
+#define KDel_Collection_Interface @"User/PartnerUserCollectionDel"//删除收藏
 
 #endif /* Const_h */

@@ -31,6 +31,11 @@
     
     self.submitBtn.layer.cornerRadius = 5.f;
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.moneyLabel.text = [UserModel defaultUser].money;
+}
 
 #pragma mark - 银行卡选择
 - (IBAction)bankCardChoose:(id)sender {
@@ -39,11 +44,24 @@
     GLMine_CardChooseController *chooseVC = [[GLMine_CardChooseController alloc] init];
    __weak __typeof(self) weakSelf = self;
     chooseVC.block = ^(NSString *bankName, NSString *bankNum, NSString *bank_id) {
-        weakSelf.bankLabel.text = [NSString stringWithFormat:@"%@(尾号%@)",bankName,bankNum];
+        NSString *lastNum;
+        if(bankNum.length>4)
+        {
+            lastNum = [bankNum substringFromIndex:bankNum.length - 4];
+        }
+        else
+        {
+            lastNum = bankNum;
+        }
+    
+        weakSelf.bank_id = bank_id;
+        weakSelf.bankLabel.text = [NSString stringWithFormat:@"%@(尾号%@)",bankName,lastNum];
+        weakSelf.bankLabel.textColor = [UIColor darkGrayColor];
     };
     chooseVC.navigationItem.title = @"银行卡选择";
     [[self viewController].navigationController pushViewController:chooseVC animated:YES];
 }
+
 - (GLMine_MyExchangeController *)viewController
 {
     for (UIView* next = [self.view superview]; next; next = next.superview) {
@@ -54,8 +72,12 @@
     }
     return nil;
 }
+
 - (IBAction)submit:(id)sender {
-    
+    if (self.bank_id.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请选择银行卡"];
+        return;
+    }
     if ([self.exchangeTF.text integerValue] <= 0.0) {
         [SVProgressHUD showErrorWithStatus:@"兑换积分数必须大于0"];
         return;
@@ -86,8 +108,10 @@
     dict[@"paypwd"] = self.secondPasswordTF.text;
     
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:KJifen_Exchange_Interface paramDic:dict finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:KMoney_Exchange_Interface paramDic:dict finish:^(id responseObject) {
+        
         [_loadV removeloadview];
+        
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];

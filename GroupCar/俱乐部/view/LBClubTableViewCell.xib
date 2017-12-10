@@ -35,6 +35,12 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdf-KW-ptR">
+                        <rect key="frame" x="10" y="121.5" width="37.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -42,14 +48,20 @@
                     <constraint firstItem="nLI-Ye-Aeo" firstAttribute="bottom" secondItem="e5J-7F-WMf" secondAttribute="bottom" id="6qJ-1T-hZF"/>
                     <constraint firstItem="1tM-px-5GB" firstAttribute="trailing" secondItem="nLI-Ye-Aeo" secondAttribute="trailing" id="PwX-nQ-zur"/>
                     <constraint firstItem="nLI-Ye-Aeo" firstAttribute="trailing" secondItem="e5J-7F-WMf" secondAttribute="trailing" id="SH7-Oh-aBn"/>
+                    <constraint firstAttribute="bottom" secondItem="pdf-KW-ptR" secondAttribute="bottom" constant="10" id="SLz-eA-Ac2"/>
                     <constraint firstItem="1tM-px-5GB" firstAttribute="leading" secondItem="nLI-Ye-Aeo" secondAttribute="leading" constant="15" id="ULF-0P-BDo"/>
                     <constraint firstItem="1tM-px-5GB" firstAttribute="bottom" secondItem="nLI-Ye-Aeo" secondAttribute="bottom" id="ZAI-tE-mbM"/>
                     <constraint firstItem="e5J-7F-WMf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="aoh-y2-Eij"/>
                     <constraint firstItem="1tM-px-5GB" firstAttribute="top" secondItem="nLI-Ye-Aeo" secondAttribute="top" id="sfr-jZ-0aP"/>
+                    <constraint firstItem="pdf-KW-ptR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="w5e-jI-E6J"/>
                     <constraint firstItem="e5J-7F-WMf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wQq-0h-7ye"/>
                     <constraint firstAttribute="bottom" secondItem="e5J-7F-WMf" secondAttribute="bottom" constant="10" id="yCC-1v-kIq"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="picImageV" destination="e5J-7F-WMf" id="fdw-Oy-spl"/>
+                <outlet property="titleLabel" destination="pdf-KW-ptR" id="N5u-tk-Chp"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

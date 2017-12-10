@@ -69,6 +69,7 @@
     dict[@"uid"] = [UserModel defaultUser].user_id;
     dict[@"type"] = @"1";
     dict[@"page"] = @(_page);
+    
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:KAchievement_Interface paramDic:dict finish:^(id responseObject) {
         [_loadV removeloadview];

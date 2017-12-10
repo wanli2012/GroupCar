@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yjb-Gv-XSj">
-                    <rect key="frame" x="0.0" y="0.0" width="279" height="50"/>
+                    <rect key="frame" x="0.0" y="64" width="279" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大众ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1a-QX-oEQ">
                             <rect key="frame" x="10" y="16.5" width="42.5" height="17"/>
@@ -64,7 +63,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YK4-d6-cmz">
-                    <rect key="frame" x="0.0" y="50" width="279" height="50"/>
+                    <rect key="frame" x="0.0" y="114" width="279" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjT-l3-k6k">
                             <rect key="frame" x="10" y="16.5" width="29" height="17"/>
@@ -103,7 +102,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JlK-6x-GtD">
-                    <rect key="frame" x="0.0" y="100" width="279" height="50"/>
+                    <rect key="frame" x="0.0" y="164" width="279" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmP-gT-9tZ">
                             <rect key="frame" x="10" y="16.5" width="57.5" height="17"/>
@@ -143,7 +142,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNM-8M-3dA">
-                    <rect key="frame" x="79.5" y="180" width="120" height="45"/>
+                    <rect key="frame" x="79.5" y="244" width="120" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="Aqb-Q8-g97"/>
                         <constraint firstAttribute="width" constant="120" id="Oqy-1o-dMy"/>
@@ -167,24 +166,23 @@
             <constraints>
                 <constraint firstItem="YK4-d6-cmz" firstAttribute="top" secondItem="Yjb-Gv-XSj" secondAttribute="bottom" id="1Jj-vu-au3"/>
                 <constraint firstItem="VZw-T7-GGc" firstAttribute="leading" secondItem="JyQ-fZ-nvq" secondAttribute="leading" id="7Qs-9V-Qki"/>
-                <constraint firstItem="Yjb-Gv-XSj" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="CrX-W6-0Py"/>
-                <constraint firstItem="qf0-WQ-FdH" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="10" id="HhJ-7b-hX9"/>
+                <constraint firstItem="Yjb-Gv-XSj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CrX-W6-0Py"/>
+                <constraint firstItem="qf0-WQ-FdH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="HhJ-7b-hX9"/>
                 <constraint firstItem="JlK-6x-GtD" firstAttribute="top" secondItem="YK4-d6-cmz" secondAttribute="bottom" id="JxP-Ec-Ic9"/>
-                <constraint firstItem="JlK-6x-GtD" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="LZf-MG-LqP"/>
-                <constraint firstItem="Yjb-Gv-XSj" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="Ltr-Fx-oMf"/>
-                <constraint firstItem="YK4-d6-cmz" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="PXV-Bq-CUD"/>
+                <constraint firstItem="JlK-6x-GtD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LZf-MG-LqP"/>
+                <constraint firstItem="YK4-d6-cmz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PXV-Bq-CUD"/>
                 <constraint firstItem="DNM-8M-3dA" firstAttribute="top" secondItem="JlK-6x-GtD" secondAttribute="bottom" constant="30" id="Q8V-3e-W83"/>
-                <constraint firstItem="DNM-8M-3dA" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="TZ6-20-Wjz"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="qf0-WQ-FdH" secondAttribute="bottom" constant="30" id="bjB-Jh-Qib"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="qf0-WQ-FdH" secondAttribute="trailing" constant="10" id="cd4-GJ-epl"/>
-                <constraint firstItem="JlK-6x-GtD" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="fg5-K0-I4d"/>
-                <constraint firstItem="YK4-d6-cmz" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="hyO-ZR-2ZQ"/>
-                <constraint firstItem="qf0-WQ-FdH" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="pei-bt-Vvd"/>
+                <constraint firstItem="DNM-8M-3dA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TZ6-20-Wjz"/>
+                <constraint firstAttribute="bottom" secondItem="qf0-WQ-FdH" secondAttribute="bottom" constant="30" id="bjB-Jh-Qib"/>
+                <constraint firstAttribute="trailing" secondItem="qf0-WQ-FdH" secondAttribute="trailing" constant="10" id="cd4-GJ-epl"/>
+                <constraint firstItem="JlK-6x-GtD" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="fg5-K0-I4d"/>
+                <constraint firstItem="YK4-d6-cmz" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="hyO-ZR-2ZQ"/>
+                <constraint firstItem="qf0-WQ-FdH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pei-bt-Vvd"/>
                 <constraint firstItem="JDv-8H-VdN" firstAttribute="leading" secondItem="JyQ-fZ-nvq" secondAttribute="leading" id="pra-mz-edK"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Yjb-Gv-XSj" secondAttribute="trailing" id="ztx-gE-t5t"/>
+                <constraint firstItem="Yjb-Gv-XSj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="x9b-f4-Oxa"/>
+                <constraint firstAttribute="trailing" secondItem="Yjb-Gv-XSj" secondAttribute="trailing" id="ztx-gE-t5t"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="-27.5" y="20.5"/>
         </view>
     </objects>

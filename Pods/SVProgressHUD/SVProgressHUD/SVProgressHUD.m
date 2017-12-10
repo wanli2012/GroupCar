@@ -278,6 +278,11 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 }
 
 + (void)showErrorWithStatus:(NSString*)status {
+    
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];//设置HUD的Style
+    [SVProgressHUD setForegroundColor:[UIColor darkGrayColor]];//设置HUD和文本的颜色
+    [SVProgressHUD setBackgroundColor:[UIColor groupTableViewBackgroundColor]];//设置HUD的背景颜色
+    
     [self showImage:[self sharedView].errorImage status:status];
 }
 

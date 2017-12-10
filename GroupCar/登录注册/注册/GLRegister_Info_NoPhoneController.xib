@@ -48,7 +48,7 @@
                             <rect key="frame" x="10" y="0.0" width="330" height="50"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="RHl-zr-vwg"/>
                             </connections>
@@ -70,7 +70,7 @@
                             <rect key="frame" x="10" y="0.0" width="330" height="50"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="Tfg-qQ-W0d"/>
                             </connections>

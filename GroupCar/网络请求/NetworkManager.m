@@ -33,7 +33,7 @@
 + (void)requestPOSTWithURLStr:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html",@"application/json",nil];
     
     manager.requestSerializer.timeoutInterval=10;
@@ -43,7 +43,7 @@
     NSString *urlStr1 = [NSString stringWithFormat:@"%@%@",BaseURL,urlStr];
     
     [manager POST:urlStr1 parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+
         finish(responseObject);
         
 //        switch ([responseObject[@"code"] integerValue]) {

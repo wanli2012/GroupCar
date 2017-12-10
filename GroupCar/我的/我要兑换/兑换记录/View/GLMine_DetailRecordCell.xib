@@ -30,8 +30,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="10000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="go5-QZ-xXd">
-                        <rect key="frame" x="77.5" y="35.5" width="231.5" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="10000.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="go5-QZ-xXd">
+                        <rect key="frame" x="77.5" y="35.5" width="65.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -49,8 +49,15 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="手续费:2.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfP-AI-uuh">
+                        <rect key="frame" x="243" y="37.5" width="66" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="sfP-AI-uuh" secondAttribute="trailing" constant="10" id="3d2-55-4De"/>
                     <constraint firstItem="THM-1x-6ee" firstAttribute="top" secondItem="Zq1-1w-vJX" secondAttribute="bottom" constant="10" id="87y-CJ-xEr"/>
                     <constraint firstAttribute="bottom" secondItem="nTv-1e-z1A" secondAttribute="bottom" id="D0N-Zd-kAV"/>
                     <constraint firstAttribute="trailing" secondItem="nTv-1e-z1A" secondAttribute="trailing" id="LoV-hy-ZcZ"/>
@@ -60,14 +67,15 @@
                     <constraint firstItem="Baw-W6-Zkh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="eQg-Ec-eqI"/>
                     <constraint firstItem="nTv-1e-z1A" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ftt-W3-R8m"/>
                     <constraint firstAttribute="trailing" secondItem="THM-1x-6ee" secondAttribute="trailing" constant="10" id="gNQ-H8-3cc"/>
-                    <constraint firstAttribute="trailing" secondItem="go5-QZ-xXd" secondAttribute="trailing" constant="10" id="kcL-E2-Sy1"/>
                     <constraint firstItem="nTv-1e-z1A" firstAttribute="top" secondItem="THM-1x-6ee" secondAttribute="bottom" constant="10" id="nKS-xL-6VO"/>
                     <constraint firstItem="go5-QZ-xXd" firstAttribute="centerY" secondItem="Zq1-1w-vJX" secondAttribute="centerY" id="qR9-9r-2nc"/>
                     <constraint firstItem="THM-1x-6ee" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ujt-kq-9cz"/>
+                    <constraint firstItem="sfP-AI-uuh" firstAttribute="centerY" secondItem="go5-QZ-xXd" secondAttribute="centerY" id="xZc-iD-8Fn"/>
                     <constraint firstItem="Zq1-1w-vJX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="yvZ-2p-hWX"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="counterLabel" destination="sfP-AI-uuh" id="Ktb-zk-RSL"/>
                 <outlet property="dateLabel" destination="Baw-W6-Zkh" id="pco-kf-bVG"/>
                 <outlet property="reasonLabel" destination="THM-1x-6ee" id="gOf-zy-Cuu"/>
                 <outlet property="sumLabel" destination="go5-QZ-xXd" id="KwB-IJ-4KT"/>

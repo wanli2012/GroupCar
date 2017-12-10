@@ -23,11 +23,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="419"/>
+            <rect key="frame" x="0.0" y="0.0" width="377" height="407"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6AD-rw-P9d">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="419"/>
+                    <rect key="frame" x="0.0" y="0.0" width="377" height="407"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tM6-jT-VkG">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -48,7 +48,7 @@
                                                 <constraint firstAttribute="height" constant="1" id="L30-Jd-gkp"/>
                                             </constraints>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="爱车" translatesAutoresizingMaskIntoConstraints="NO" id="Soe-xV-Xm8">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Headportrait" translatesAutoresizingMaskIntoConstraints="NO" id="Soe-xV-Xm8">
                                             <rect key="frame" x="315" y="10" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="7LQ-ZX-mZH"/>
@@ -263,7 +263,7 @@
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="34.5" y="-70.5"/>
+            <point key="canvasLocation" x="36.5" y="-99.5"/>
         </view>
         <tapGestureRecognizer id="tVH-WT-2cV" userLabel="修改头像">
             <connections>
@@ -277,6 +277,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="爱车" width="50" height="50"/>
+        <image name="Headportrait" width="50" height="50"/>
     </resources>
 </document>

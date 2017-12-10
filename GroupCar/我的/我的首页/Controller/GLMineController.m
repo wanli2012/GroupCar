@@ -104,9 +104,6 @@
                 [UserModel defaultUser].mark = responseObject[@"data"][@"mark"];
                 [UserModel defaultUser].u_group = responseObject[@"data"][@"u_group"];
                 [UserModel defaultUser].status = responseObject[@"data"][@"status"];
-                [UserModel defaultUser].dz_name = responseObject[@"data"][@"dz_name"];
-                [UserModel defaultUser].truename = responseObject[@"data"][@"truename"];
-                [UserModel defaultUser].idcard = responseObject[@"data"][@"idcard"];
                 
                 [usermodelachivar achive];
             }

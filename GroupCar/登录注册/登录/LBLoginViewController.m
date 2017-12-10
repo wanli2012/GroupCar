@@ -103,6 +103,10 @@
             [UserModel defaultUser].token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
             [UserModel defaultUser].uname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uname"]];
             [UserModel defaultUser].user_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_id"]];
+            
+            [UserModel defaultUser].truename = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"truename"]];
+            [UserModel defaultUser].dz_name = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"dz_name"]];
+            [UserModel defaultUser].idcard = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"idcard"]];
 
             [UserModel defaultUser].loginstatus = YES;
 

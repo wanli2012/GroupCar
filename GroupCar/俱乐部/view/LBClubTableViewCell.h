@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLClubModel.h"
 
 @interface LBClubTableViewCell : UITableViewCell
+
+@property (nonatomic, strong)GLClubModel *model;
 
 @end

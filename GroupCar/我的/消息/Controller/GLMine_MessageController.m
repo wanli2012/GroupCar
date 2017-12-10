@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_MessageCell" bundle:nil] forCellReuseIdentifier:@"GLMine_MessageCell"];
     [self.tableView addSubview:self.nodataV];
     self.nodataV.hidden = YES;
@@ -57,6 +58,7 @@
     
     self.navigationController.navigationBar.hidden = NO;
 }
+
 #pragma mark - 设置导航栏
 - (void)setNav{
     UIButton *right = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
@@ -74,6 +76,19 @@
 }
 #pragma mark - 清空全部消息
 - (void)delAll {
+    
+    if(self.models.count == 0){
+        [SVProgressHUD showErrorWithStatus:@"没有消息可以清空了"];
+        return;
+    }
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定清空消息？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertController removeFromParentViewController];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].user_id;
@@ -99,6 +114,10 @@
     } enError:^(NSError *error) {
         [_loadV removeloadview];
     }];
+        
+    }]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
     
 }
 #pragma mark - 请求数据
@@ -112,12 +131,12 @@
     
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].user_id;
-    dict[@"type"] = @"1";
+//    dict[@"type"] = @"1";
     dict[@"page"] = @(_page);
     
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     
-    [NetworkManager requestPOSTWithURLStr:KAchievement_Interface paramDic:dict finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:KMessage_Interface paramDic:dict finish:^(id responseObject) {
         [_loadV removeloadview];
         [self endRefresh];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
@@ -158,7 +177,7 @@
 
 #pragma mark - 删除消息
 - (void)deleteTheMessage:(NSInteger)index{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除该商品？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除该消息？" preferredStyle:UIAlertControllerStyleAlert];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [alertController removeFromParentViewController];
@@ -171,27 +190,27 @@
         dict[@"token"] = [UserModel defaultUser].token;
         dict[@"uid"] = [UserModel defaultUser].user_id;
         dict[@"type"] = @"1";//1单条消息清除 2全部消息清除
-        
-//        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-//        [NetworkManager requestPOSTWithURLStr:KDel_Message_Interface paramDic:dict finish:^(id responseObject) {
-//
-//            [_loadV removeloadview];
-//
-//            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-//
-//                [self.models removeObjectAtIndex:indexPath.row];
-//
-//                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-//
-//                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//            }else{
-//
-//                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-//            }
-//
-//        } enError:^(NSError *error) {
-//            [_loadV removeloadview];
-//        }];
+        dict[@"logid"] = model.id;
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:KDel_Message_Interface paramDic:dict finish:^(id responseObject) {
+
+            [_loadV removeloadview];
+
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+
+                [self.models removeObjectAtIndex:index];
+
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+
+                [self.tableView reloadData];
+            }else{
+
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
+
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+        }];
         
     }]];
     

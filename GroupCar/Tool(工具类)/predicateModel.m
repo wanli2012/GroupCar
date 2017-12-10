@@ -86,6 +86,7 @@
     NSPredicate *bankCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
     return [bankCardPredicate evaluateWithObject:bankCardNumber];
 }
+
 +(BOOL)IsChinese:(NSString *)str {
     for(int i=0; i< [str length];i++){
         int a = [str characterAtIndex:i];

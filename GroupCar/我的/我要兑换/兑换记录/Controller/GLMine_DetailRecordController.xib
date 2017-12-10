@@ -16,12 +16,12 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="151" height="206"/>
+        <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="337"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rEq-OJ-zed">
-                    <rect key="frame" x="0.0" y="0.0" width="151" height="206"/>
+                    <rect key="frame" x="0.0" y="0.0" width="339" height="337"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="cD2-Cf-IUH"/>
@@ -29,7 +29,7 @@
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="0.93987983470000003" green="0.087858642860000002" blue="0.116909073" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="rEq-OJ-zed" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="D6K-eg-csp"/>
                 <constraint firstItem="rEq-OJ-zed" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ES4-aO-Q0h"/>
@@ -37,7 +37,7 @@
                 <constraint firstAttribute="trailing" secondItem="rEq-OJ-zed" secondAttribute="trailing" id="Xv5-Zd-btq"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="31" y="131"/>
+            <point key="canvasLocation" x="9.5" y="118.5"/>
         </view>
     </objects>
 </document>

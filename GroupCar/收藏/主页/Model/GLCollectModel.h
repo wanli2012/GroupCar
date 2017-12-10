@@ -10,10 +10,11 @@
 
 @interface GLCollectModel : NSObject
 
-@property (nonatomic, copy)NSString *picName;
-@property (nonatomic, copy)NSString *goodName;
-@property (nonatomic, copy)NSString *price;
-@property (nonatomic, copy)NSString *firstPrice;
+@property (nonatomic, copy)NSString *goods_name;
+@property (nonatomic, copy)NSString *goods_discount;
+@property (nonatomic, copy)NSString *lowest;
+@property (nonatomic, copy)NSString *thumb;
+@property (nonatomic, copy)NSString *cid;
 
 @property (nonatomic, assign)BOOL isSelect;//是否被选中
 @property (nonatomic, assign)BOOL isEdit;//是否处于编辑状态

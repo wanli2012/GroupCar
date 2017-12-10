@@ -28,14 +28,17 @@
     [super viewDidLoad];
     self.submitBtn.layer.cornerRadius = 5.f;
     
-    self.accountLabel.text = [UserModel defaultUser].dz_name;
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
+    self.accountLabel.text = [UserModel defaultUser].dz_name;
+    self.jifenLabel.text = [UserModel defaultUser].mark;
+    
 }
+
 #pragma mark - 提交
 - (IBAction)submit:(id)sender {
     if ([self.exchangeJifenTF.text integerValue] <= 0.0) {
@@ -125,6 +128,5 @@
     }
     return YES;
 }
-
 
 @end

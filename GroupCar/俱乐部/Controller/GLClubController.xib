@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLClubController">
             <connections>
-                <outlet property="tableview" destination="iX2-X9-9PC" id="Wi8-pq-Pk5"/>
+                <outlet property="tableView" destination="iX2-X9-9PC" id="1Rq-NM-D7n"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,25 +41,60 @@
                         <constraint firstAttribute="bottom" secondItem="sRi-oz-IeV" secondAttribute="bottom" constant="15" id="y7E-d4-8Kj"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iX2-X9-9PC">
-                    <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iX2-X9-9PC">
+                    <rect key="frame" x="0.0" y="114" width="375" height="504"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="ebe-gL-RQK"/>
                         <outlet property="delegate" destination="-1" id="oFn-uj-dj2"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nej-ZT-x33">
+                    <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom-club" translatesAutoresizingMaskIntoConstraints="NO" id="0yP-EY-l0k">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轻松自驾游" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29X-OV-6dY">
+                            <rect key="frame" x="144" y="12" width="87" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="6bg-Fu-ggY"/>
+                                <constraint firstAttribute="height" constant="25" id="lOP-03-ZLr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.33683365580000002" green="0.3341783881" blue="0.93200659750000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="29X-OV-6dY" firstAttribute="centerX" secondItem="0yP-EY-l0k" secondAttribute="centerX" id="4ZC-Ed-hM7"/>
+                        <constraint firstAttribute="height" constant="50" id="6Jk-YY-mFH"/>
+                        <constraint firstItem="29X-OV-6dY" firstAttribute="centerY" secondItem="0yP-EY-l0k" secondAttribute="centerY" id="GQx-AI-JNk"/>
+                        <constraint firstAttribute="bottom" secondItem="0yP-EY-l0k" secondAttribute="bottom" id="f3d-7M-mYG"/>
+                        <constraint firstItem="0yP-EY-l0k" firstAttribute="top" secondItem="Nej-ZT-x33" secondAttribute="top" id="rfJ-Wx-4hh"/>
+                        <constraint firstAttribute="trailing" secondItem="0yP-EY-l0k" secondAttribute="trailing" id="uxB-V3-dcw"/>
+                        <constraint firstItem="0yP-EY-l0k" firstAttribute="leading" secondItem="Nej-ZT-x33" secondAttribute="leading" id="yOW-ok-KMt"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Nej-ZT-x33" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Sb-x8-hz8"/>
                 <constraint firstItem="iX2-X9-9PC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Cy5-MP-6A0"/>
+                <constraint firstItem="iX2-X9-9PC" firstAttribute="top" secondItem="Nej-ZT-x33" secondAttribute="bottom" id="IBI-XW-gUU"/>
                 <constraint firstItem="gJG-hh-SOp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Y1C-YU-KNu"/>
                 <constraint firstAttribute="trailing" secondItem="gJG-hh-SOp" secondAttribute="trailing" id="cVR-MP-cSm"/>
                 <constraint firstItem="gJG-hh-SOp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dgt-TZ-ocT"/>
+                <constraint firstAttribute="trailing" secondItem="Nej-ZT-x33" secondAttribute="trailing" id="e2M-NH-LxE"/>
                 <constraint firstAttribute="bottom" secondItem="iX2-X9-9PC" secondAttribute="bottom" constant="49" id="gn5-SM-MfH"/>
-                <constraint firstItem="iX2-X9-9PC" firstAttribute="top" secondItem="gJG-hh-SOp" secondAttribute="bottom" id="jIp-SP-iEg"/>
                 <constraint firstAttribute="trailing" secondItem="iX2-X9-9PC" secondAttribute="trailing" id="rVD-du-eK8"/>
+                <constraint firstItem="Nej-ZT-x33" firstAttribute="top" secondItem="gJG-hh-SOp" secondAttribute="bottom" id="zTc-Rz-zJD"/>
             </constraints>
+            <point key="canvasLocation" x="35.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="bottom-club" width="375" height="50"/>
+    </resources>
 </document>

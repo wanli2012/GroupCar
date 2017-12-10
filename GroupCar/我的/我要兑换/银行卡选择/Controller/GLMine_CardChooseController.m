@@ -28,11 +28,16 @@
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_CardCell" bundle:nil] forCellReuseIdentifier:@"GLMine_CardCell"];
-//    [self.tableView addSubview:self.nodataV];
-//    self.nodataV.hidden = YES;
-    
+
     self.addBtn.layer.cornerRadius = 5.f;
     
+    [self postRequest];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"AddCardNotification" object:nil];
+}
+
+#pragma mark - 刷新
+- (void)refresh{
     [self postRequest];
 }
 
@@ -85,6 +90,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GLMine_CardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CardCell"];
     
+    cell.model = self.models[indexPath.row];
     cell.selectionStyle = 0;
     return cell;
 }

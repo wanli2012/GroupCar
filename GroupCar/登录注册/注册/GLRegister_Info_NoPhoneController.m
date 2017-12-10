@@ -75,7 +75,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
     if(_isAgreeProtocol){
-        dict[@"agreement"] = @"2";//1注册账号 2完善注册账号传 协议是否勾选 传1
+        dict[@"agreement"] = @"1";//1注册账号 2完善注册账号传 协议是否勾选 传1
     }else{
         dict[@"agreement"] = nil;
     }
@@ -83,7 +83,7 @@
     dict[@"type"] = @"2";//1注册账号 2完善注册账号 3已有账号绑定
     dict[@"userphone"] = self.phone;
     dict[@"password"] = self.passwordTF.text;
-    dict[@"confirmpwd"] = @"2";
+    dict[@"confirmpwd"] = self.ensureTF.text;
     dict[@"appid"] = self.appid;
     dict[@"Referee"] = self.recommendTF.text;
     dict[@"port"] = @"1";//那个端口注册 1ios 2安卓 3web 默认1

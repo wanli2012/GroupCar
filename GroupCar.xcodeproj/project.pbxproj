@@ -17,6 +17,9 @@
 		4A09C1691FD54C690066756B /* GLMine_Set_AccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A09C1671FD54C690066756B /* GLMine_Set_AccountController.m */; };
 		4A09C16A1FD54C690066756B /* GLMine_Set_AccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A09C1681FD54C690066756B /* GLMine_Set_AccountController.xib */; };
 		4A09C16E1FD54EB40066756B /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A09C16D1FD54EB40066756B /* RSAEncryptor.m */; };
+		4A124AE81FDCCFB100E38782 /* GLBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A124AE71FDCCFB100E38782 /* GLBankModel.m */; };
+		4A124AEB1FDD680500E38782 /* GLClubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A124AEA1FDD680500E38782 /* GLClubModel.m */; };
+		4A124AED1FDD742000E38782 /* 引导页和启动图.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A124AEC1FDD742000E38782 /* 引导页和启动图.xcassets */; };
 		4A187AB51FDA231300FA8B5F /* GLMine_RechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A187AB31FDA231300FA8B5F /* GLMine_RechargeController.m */; };
 		4A187AB61FDA231300FA8B5F /* GLMine_RechargeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A187AB41FDA231300FA8B5F /* GLMine_RechargeController.xib */; };
 		4A1D3E7B1FDA7D340051E051 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1D3E7A1FDA7BDC0051E051 /* Foundation.framework */; };
@@ -59,7 +62,6 @@
 		4A4A80191F500BD000532E2F /* Tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A4A80181F500BD000532E2F /* Tabbar.xcassets */; };
 		4A586AC21F4D2DAB00FDE330 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A586AC11F4D2DAB00FDE330 /* main.m */; };
 		4A586AC51F4D2DAB00FDE330 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A586AC41F4D2DAB00FDE330 /* AppDelegate.m */; };
-		4A586ACB1F4D2DAB00FDE330 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A586AC91F4D2DAB00FDE330 /* Main.storyboard */; };
 		4A586ACE1F4D2DAC00FDE330 /* GroupCar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A586ACC1F4D2DAC00FDE330 /* GroupCar.xcdatamodeld */; };
 		4A586AD01F4D2DAC00FDE330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A586ACF1F4D2DAC00FDE330 /* Assets.xcassets */; };
 		4A586AD31F4D2DAC00FDE330 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A586AD11F4D2DAC00FDE330 /* LaunchScreen.storyboard */; };
@@ -207,6 +209,11 @@
 		4A09C1681FD54C690066756B /* GLMine_Set_AccountController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLMine_Set_AccountController.xib; sourceTree = "<group>"; };
 		4A09C16C1FD54EB40066756B /* RSAEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
 		4A09C16D1FD54EB40066756B /* RSAEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
+		4A124AE61FDCCFB100E38782 /* GLBankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLBankModel.h; sourceTree = "<group>"; };
+		4A124AE71FDCCFB100E38782 /* GLBankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLBankModel.m; sourceTree = "<group>"; };
+		4A124AE91FDD680500E38782 /* GLClubModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLClubModel.h; sourceTree = "<group>"; };
+		4A124AEA1FDD680500E38782 /* GLClubModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLClubModel.m; sourceTree = "<group>"; };
+		4A124AEC1FDD742000E38782 /* 引导页和启动图.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "引导页和启动图.xcassets"; sourceTree = "<group>"; };
 		4A16C6853461BC21B7856FC6 /* Pods-GroupCar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroupCar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GroupCar/Pods-GroupCar.debug.xcconfig"; sourceTree = "<group>"; };
 		4A187AB21FDA231300FA8B5F /* GLMine_RechargeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMine_RechargeController.h; sourceTree = "<group>"; };
 		4A187AB31FDA231300FA8B5F /* GLMine_RechargeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLMine_RechargeController.m; sourceTree = "<group>"; };
@@ -271,7 +278,6 @@
 		4A586AC11F4D2DAB00FDE330 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4A586AC31F4D2DAB00FDE330 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4A586AC41F4D2DAB00FDE330 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4A586ACA1F4D2DAB00FDE330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A586ACD1F4D2DAC00FDE330 /* GroupCar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GroupCar.xcdatamodel; sourceTree = "<group>"; };
 		4A586ACF1F4D2DAC00FDE330 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A586AD21F4D2DAC00FDE330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -889,7 +895,6 @@
 				F9560C731F7B75280015FD21 /* 三方 */,
 				4AC146501FD912DC0081E9EA /* 自己封装 */,
 				4A586ADD1F4D2DE400FDE330 /* Common */,
-				4A586AC91F4D2DAB00FDE330 /* Main.storyboard */,
 				4A586B251F4D4FD700FDE330 /* GroupCar.pch */,
 				4A586B241F4D4EB700FDE330 /* Const.h */,
 				4A586B3A1F4D769500FDE330 /* Tool(工具类) */,
@@ -955,9 +960,9 @@
 		4A586AFF1F4D2F3000FDE330 /* 俱乐部 */ = {
 			isa = PBXGroup;
 			children = (
+				4A586B001F4D2F3000FDE330 /* Controller */,
 				F9560C7D1F7B800C0015FD21 /* model */,
 				F9560C7E1F7B800C0015FD21 /* view */,
-				4A586B001F4D2F3000FDE330 /* Controller */,
 			);
 			path = "俱乐部";
 			sourceTree = "<group>";
@@ -1037,6 +1042,7 @@
 				F9560C891F7B81C40015FD21 /* 俱乐部.xcassets */,
 				F9560C911F7B8D920015FD21 /* 商城.xcassets */,
 				4AF9CA4F1FD6958400F4DC6B /* 登录注册.xcassets */,
+				4A124AEC1FDD742000E38782 /* 引导页和启动图.xcassets */,
 			);
 			path = "图片资源";
 			sourceTree = "<group>";
@@ -1172,6 +1178,8 @@
 		4AC146341FD909400081E9EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A124AE61FDCCFB100E38782 /* GLBankModel.h */,
+				4A124AE71FDCCFB100E38782 /* GLBankModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1580,6 +1588,8 @@
 		F9560C7D1F7B800C0015FD21 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				4A124AE91FDD680500E38782 /* GLClubModel.h */,
+				4A124AEA1FDD680500E38782 /* GLClubModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1803,6 +1813,7 @@
 				F9560C831F7B80170015FD21 /* GLNearby_SectionHeaderView.xib in Resources */,
 				4ADB9B691FD7834900AC7B08 /* GLMine_MessageCell.xib in Resources */,
 				4A187AB61FDA231300FA8B5F /* GLMine_RechargeController.xib in Resources */,
+				4A124AED1FDD742000E38782 /* 引导页和启动图.xcassets in Resources */,
 				4A09C1401FD4F2D30066756B /* GLMineController.xib in Resources */,
 				4A279CC81FDAD21100919461 /* GLMine_Set_PhoneModifyController.xib in Resources */,
 				4A4A80011F4FF8A400532E2F /* LBOutOfTheOrdinaryTableViewCell.xib in Resources */,
@@ -1835,7 +1846,6 @@
 				4AC146441FD90A440081E9EA /* GLMine_CardCell.xib in Resources */,
 				4A586AF41F4D2DF800FDE330 /* NodataView.xib in Resources */,
 				4A4A800E1F4FF8A400532E2F /* GLequipMentSectionHeader.xib in Resources */,
-				4A586ACB1F4D2DAB00FDE330 /* Main.storyboard in Resources */,
 				4A34767A1FD81188005FB2E8 /* GLCollectCell.xib in Resources */,
 				4AA726F81FD93C6F004323BF /* GLMine_DetailRecordCell.xib in Resources */,
 				F9560C721F7B490A0015FD21 /* 我的.xcassets in Resources */,
@@ -1975,9 +1985,11 @@
 				4A586AE51F4D2DE400FDE330 /* BasetabbarViewController.m in Sources */,
 				4A4A80061F4FF8A400532E2F /* GLequipMentController.m in Sources */,
 				4ADB9B631FD782DF00AC7B08 /* GLMine_MessageController.m in Sources */,
+				4A124AEB1FDD680500E38782 /* GLClubModel.m in Sources */,
 				4A1D3E891FDA9B960051E051 /* GLRegister_Info_HavePhoneController.m in Sources */,
 				4A586B501F4D769500FDE330 /* formattime.m in Sources */,
 				4A4A800B1F4FF8A400532E2F /* GLequipMentHeaderView.m in Sources */,
+				4A124AE81FDCCFB100E38782 /* GLBankModel.m in Sources */,
 				4ADB9B921FD7C01800AC7B08 /* XBTagTitleCell.m in Sources */,
 				4ADB9B9C1FD7C17700AC7B08 /* GLMine_ShareAchieveController.m in Sources */,
 				4A3476741FD80719005FB2E8 /* GLCollectController.m in Sources */,
@@ -2011,14 +2023,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4A586AC91F4D2DAB00FDE330 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4A586ACA1F4D2DAB00FDE330 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4A586AD11F4D2DAC00FDE330 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

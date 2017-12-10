@@ -30,9 +30,10 @@
 
 - (void)setModel:(GLCollectModel *)model{
     _model = model;
-    self.titleLabel.text = model.goodName;
-    self.priceLabel.text = [NSString stringWithFormat:@"价格:%@",model.price];
-    self.paymentLabel.text = [NSString stringWithFormat:@"¥%@",model.firstPrice];
+    self.titleLabel.text = model.goods_name;
+    self.priceLabel.text = [NSString stringWithFormat:@"价格:%@",model.goods_discount];
+    self.paymentLabel.text = [NSString stringWithFormat:@"%@成",model.lowest];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
     if (model.isEdit) {
         self.signImageV.hidden = NO;

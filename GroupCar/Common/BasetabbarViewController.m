@@ -8,11 +8,15 @@
 
 #import "BasetabbarViewController.h"
 #import "BaseNavigationViewController.h"
-#import "GLHomePageController.h"
+
+
+//#import "GLHomePageController.h"
+#import "GLHomeController.h"
+
 #import "GLClubController.h"
 #import "GLMineController.h"
 
-#import "GLequipMentController.h"
+//#import "GLequipMentController.h"
 
 #import "GLCollectController.h"
 #import "LBLoginViewController.h"
@@ -47,7 +51,7 @@
 - (void)addViewControllers {
 
     //首页
-    GLHomePageController *homeVC = [[GLHomePageController alloc] init];
+    GLHomeController *homeVC = [[GLHomeController alloc] init];
     BaseNavigationViewController *homeNav = [[BaseNavigationViewController alloc] initWithRootViewController:homeVC];
     homeNav.tabBarItem = [self barTitle:@"商城" image:@"首页" selectImage:@"首页点中"];
 

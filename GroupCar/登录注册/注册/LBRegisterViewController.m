@@ -8,6 +8,7 @@
 
 #import "LBRegisterViewController.h"
 #import "LBLoginViewController.h"
+#import "GLWebViewController.h"
 
 @interface LBRegisterViewController ()<UITextFieldDelegate>
 {
@@ -99,7 +100,12 @@
 
 #pragma mark - 跳转到注册协议
 - (IBAction)pushToProtocol:(id)sender {
-    NSLog(@"跳转到注册协议");
+
+    GLWebViewController *webVC = [[GLWebViewController alloc] init];
+  
+    webVC.url = [NSString stringWithFormat:@"%@",H5_Recharge_DelegateURL];
+    
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 #pragma mark - 是否同意注册协议
@@ -216,14 +222,14 @@
     [NetworkManager requestPOSTWithURLStr:KRegister paramDic:dict finish:^(id responseObject) {
         
         [_loadV removeloadview];
-        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+        if ([responseObject[@"code"] integerValue] == LOGIN_SUCCESS_CODE||[responseObject[@"code"] integerValue] == SUCCESS_CODE) {
 
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
 
-            [UIView animateWithDuration:0.3 animations:^{
-
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
                 [self.navigationController popViewControllerAnimated:YES];
-            }];
+            });
 
         }else{
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];

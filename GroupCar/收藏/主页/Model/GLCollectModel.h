@@ -15,6 +15,7 @@
 @property (nonatomic, copy)NSString *lowest;
 @property (nonatomic, copy)NSString *thumb;
 @property (nonatomic, copy)NSString *cid;
+@property (nonatomic, copy)NSString *goodsid;
 
 @property (nonatomic, assign)BOOL isSelect;//是否被选中
 @property (nonatomic, assign)BOOL isEdit;//是否处于编辑状态

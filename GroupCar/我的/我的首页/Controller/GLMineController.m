@@ -18,6 +18,7 @@
 #import "GLMine_RechargeController.h"//充值
 #import "GLMine_RealnameController.h"//实名认证
 #import "GLMine_DelegateController.h"//成为代理商
+#import "GLWebViewController.h"
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -181,10 +182,19 @@
 #pragma mark - 我要充值
 - (IBAction)recharge:(id)sender {
     
+//    self.hidesBottomBarWhenPushed = YES;
+//    GLMine_RechargeController *rechargeVC = [[GLMine_RechargeController alloc] init];
+//    rechargeVC.navigationItem.title = @"充值";
+//    [self.navigationController pushViewController:rechargeVC animated:YES];
+//    self.hidesBottomBarWhenPushed = NO;
+
     self.hidesBottomBarWhenPushed = YES;
-    GLMine_RechargeController *rechargeVC = [[GLMine_RechargeController alloc] init];
-    rechargeVC.navigationItem.title = @"充值";
-    [self.navigationController pushViewController:rechargeVC animated:YES];
+    GLWebViewController *webVC = [[GLWebViewController alloc] init];
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_RechargeURL];
+    
+    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id];
+    
+    [self.navigationController pushViewController:webVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
 }
 

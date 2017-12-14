@@ -40,12 +40,19 @@
 #define WEIXIN_APPSECRET @"4fae7202764cda777d88c9515b5ca24e"
 
 
-//占位图
-#define PlaceHolderImage @"爱车"
+//获取appStore上的最新版本号地址
+#define GET_VERSION  @"https://itunes.apple.com/lookup?id=1300026210"
+//下载地址
+#define DOWNLOAD_URL @"https://itunes.apple.com/cn/app/id1300026210?mt=8"
 
+
+//占位图
+#define PlaceHolderImage @"占位图"
 #define Share_URL @"http://www.baidu.com"
 
-#define BaseURL @"http://192.168.0.149/car/App/"
+#define BaseURL @"http://jj.51dztg.com/App/"//线上
+//#define BaseURL @"http://192.168.0.137/car/App/"
+
 #define KRegister @"User/PartnerRegister" //注册
 #define KGet_Code_Interface @"User/PartneVerificationCode"//验证码
 #define KLogin_Interface @"User/PartnerLogin" //登录
@@ -69,5 +76,23 @@
 #define KGet_Club_Activity_Interface @"Deploy/ClubActivities"//获取俱乐部活动
 #define KGet_Collection_Interface @"User/PartnerUserCollection"//获取我的收藏
 #define KDel_Collection_Interface @"User/PartnerUserCollectionDel"//删除收藏
+#define KGet_ShopGoods_Interface @"Shop/ShopGoodsRecommend"//首页商品展示
+#define KGet_Band_Interface @"Shop/ShopPreferredBrand"//获取推荐品牌
+#define KGet_Notice_Interface @"Shop/Notice"//获取公告
+#define KGet_ShopBanner_Interface @"Shop/ShopBanner"//获取商城轮播图
+#define KCollecte_goods_Interface @"Shop/ShopGoodsCollection"//商品收藏
+#define KShare_Image_Interface @"User/PartnerUserShare"//分享二维码
+
+//H5页面链接
+#define H5_baseURL @"http://jj.51dztg.com/wecat/"
+
+#define H5_CarListURL @"carList.html"
+#define H5_noticeDetailURL @"noticeDetail.html"
+#define H5_CarDetailURL @"carDetail.html"
+#define H5_SearhURL @"search.html"
+#define H5_ClubDetailURL @"clubDetail.html"
+#define H5_brandURL @"brand.html"
+#define H5_RechargeURL @"recharge.html"
+#define H5_Recharge_DelegateURL @"xy/register.html"
 
 #endif /* Const_h */

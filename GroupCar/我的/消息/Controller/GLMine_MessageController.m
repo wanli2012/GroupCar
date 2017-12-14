@@ -101,7 +101,7 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
           
-            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
          
             [self.models removeAllObjects];
             
@@ -151,11 +151,6 @@
                     [self.models addObject:model];
                 }
             }
-        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
-            
-            if (self.models.count != 0) {
-                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-            }
         }else{
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
@@ -200,7 +195,7 @@
 
                 [self.models removeObjectAtIndex:index];
 
-                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
 
                 [self.tableView reloadData];
             }else{

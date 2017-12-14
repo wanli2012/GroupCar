@@ -1,4 +1,4 @@
-//
+
 //  GLCollectController.m
 //  GroupCar
 //
@@ -38,6 +38,8 @@
     self.headerHeight.constant = 0;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLCollectCell" bundle:nil] forCellReuseIdentifier:@"GLCollectCell"];
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
     
     _isEdit = NO;
     
@@ -51,11 +53,11 @@
         
     }];
     
-//    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//
-//        [weakSelf postRequest:NO];
-//
-//    }];
+    //    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    //
+    //        [weakSelf postRequest:NO];
+    //
+    //    }];
     
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
@@ -65,18 +67,19 @@
     [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
     
     self.tableView.mj_header = header;
-//    self.tableView.mj_footer = footer;
+    //    self.tableView.mj_footer = footer;
     
     self.page = 1;
-    [self postRequest:YES];
+    
 }
+
 #pragma mark - 请求数据
 - (void)postRequest:(BOOL)isRefresh{
     
     _isEdit = YES;
     self.editBtn.selected = YES;
     [self edit:self.editBtn];
-
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     dict[@"token"] = [UserModel defaultUser].token;
@@ -88,12 +91,12 @@
         [_loadV removeloadview];
         [self endRefresh];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            if(isRefresh){
+                
+                [self.models removeAllObjects];
+            }
             if ([responseObject[@"data"] count] != 0) {
                 
-                if(isRefresh){
-                    
-                    [self.models removeAllObjects];
-                }
                 for (NSDictionary *dic in responseObject[@"data"]) {
                     GLCollectModel * model = [GLCollectModel mj_objectWithKeyValues:dic];
                     
@@ -130,7 +133,9 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = YES;
+    [self postRequest:YES];
 }
+
 #pragma mark - 编辑
 - (IBAction)edit:(UIButton *)sender {
     
@@ -145,7 +150,7 @@
         self.headerHeight.constant = 40;
         self.headerView.hidden = NO;
         [self.editBtn setTitle:@"完成" forState:UIControlStateNormal];
-       [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-no-r"] forState:UIControlStateNormal];
+        [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-no-r"] forState:UIControlStateNormal];
         self.selectAllBtn.selected = YES;
         [self selectAll:@""];
         
@@ -175,7 +180,7 @@
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self deleteTheCollection:arr];
-
+        
     }];
     
     [alertVC addAction:cancel];
@@ -194,14 +199,14 @@
     
     NSMutableArray *arr = [NSMutableArray array];
     for (GLCollectModel *model in selectArr) {
-        [arr addObject:model.cid];
+        [arr addObject:model.goodsid];
     }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].user_id;
-    dict[@"cid"] = [arr componentsJoinedByString:@","];
+    dict[@"goodsid"] = [arr componentsJoinedByString:@","];
     
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:KDel_Collection_Interface paramDic:dict finish:^(id responseObject) {
@@ -217,6 +222,7 @@
                 self.editBtn.selected = YES;
                 [self edit:self.editBtn];
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GLCollecteNOtification" object:nil];
             
         }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
             
@@ -242,20 +248,20 @@
         [SVProgressHUD showErrorWithStatus:@"还未收藏商品"];
         return;
     }
-
+    
     self.selectAllBtn.selected = !self.selectAllBtn.selected;
     
     if (self.selectAllBtn.selected) {
-       
+        
         [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-yes-r"] forState:UIControlStateNormal];
         for (GLCollectModel *model in self.models) {
             model.isSelect = YES;
-         
+            
         }
         
     }else{
         [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-no-r"] forState:UIControlStateNormal];
-     
+        
         for (GLCollectModel *model in self.models) {
             model.isSelect = NO;
         }
@@ -279,7 +285,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GLCollectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLCollectCell"];
     GLCollectModel *model = self.models[indexPath.row];
-   
+    
     model.isEdit = _isEdit;
     cell.model = model;
     cell.selectionStyle = 0;
@@ -295,7 +301,7 @@
     model.isSelect = !model.isSelect;
     
     NSInteger selectNum = 0;
- 
+    
     for (GLCollectModel *model in self.models) {
         if (model.isSelect) {
             selectNum += 1;
@@ -309,7 +315,7 @@
         self.selectAllBtn.selected = NO;
         [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-no-r"] forState:UIControlStateNormal];
     }
- 
+    
     
     [self.tableView reloadData];
 }
@@ -318,9 +324,16 @@
 - (NSMutableArray *)models{
     if (!_models) {
         _models = [NSMutableArray array];
-
+        
     }
     return _models;
 }
-
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 50 - 50);
+        
+    }
+    return _nodataV;
+}
 @end

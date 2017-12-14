@@ -89,7 +89,7 @@
         
         [_loadV removeloadview];
         
-        if ([responseObject[@"code"] integerValue] == LOGIN_SUCCESS_CODE) {
+        if ([responseObject[@"code"] integerValue] == LOGIN_SUCCESS_CODE || [responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             

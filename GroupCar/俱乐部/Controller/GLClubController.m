@@ -10,6 +10,7 @@
 #import "GLNearby_SectionHeaderView.h"
 #import "LBClubTableViewCell.h"
 #import "GLClubModel.h"
+#import "GLWebViewController.h"
 
 @interface GLClubController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -41,11 +42,11 @@ static NSString *LBClub = @"LBClubTableViewCell";
         
     }];
     
-    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-        [weakSelf postRequest:NO];
-        
-    }];
+//    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        
+//        [weakSelf postRequest:NO];
+//        
+//    }];
     
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
@@ -55,7 +56,7 @@ static NSString *LBClub = @"LBClubTableViewCell";
     [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
     
     self.tableView.mj_header = header;
-    self.tableView.mj_footer = footer;
+//    self.tableView.mj_footer = footer;
     
     self.page = 1;
     [self postRequest:YES];
@@ -69,11 +70,11 @@ static NSString *LBClub = @"LBClubTableViewCell";
 
 #pragma mark - 请求数据
 - (void)postRequest:(BOOL)isRefresh{
-    if (isRefresh) {
-        self.page = 1;
-    }else{
-        self.page ++ ;
-    }
+//    if (isRefresh) {
+//        self.page = 1;
+//    }else{
+//        self.page ++ ;
+//    }
 
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:KGet_Club_Activity_Interface paramDic:@{} finish:^(id responseObject) {
@@ -149,17 +150,24 @@ static NSString *LBClub = @"LBClubTableViewCell";
     cell.selectionStyle = 0;
     cell.model = self.models[indexPath.row];
     return cell;
-    
-    return [[UITableViewCell alloc]init];
-    
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 150;
-    
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    self.hidesBottomBarWhenPushed = YES;
+    GLWebViewController *webVC = [[GLWebViewController alloc] init];
+    GLClubModel *model = self.models[indexPath.row];
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_ClubDetailURL];
+    
+    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&event_id)=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.event_id];
+    
+    [self.navigationController pushViewController:webVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
     
 }
 

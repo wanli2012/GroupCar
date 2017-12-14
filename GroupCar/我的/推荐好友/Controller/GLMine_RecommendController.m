@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 
+@property (strong, nonatomic)LoadWaitView *loadV;
+@property (nonatomic, copy)NSString *shareImageUrl;
+
 @end
 
 @implementation GLMine_RecommendController
@@ -29,7 +32,35 @@
     UILongPressGestureRecognizer *ges = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(share:)];
     [self.picImageV addGestureRecognizer:ges];
     
-    [self logoQrCode];
+//    [self logoQrCode];
+    [self postRequest];
+    
+}
+
+- (void)postRequest {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].user_id;
+
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    
+    [NetworkManager requestPOSTWithURLStr:KShare_Image_Interface paramDic:dict finish:^(id responseObject) {
+        [_loadV removeloadview];
+       
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            
+            [self.picImageV sd_setImageWithURL:[NSURL URLWithString:responseObject[@"data"][@"qrcode"]] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+            self.shareImageUrl = responseObject[@"data"][@"qrcode"];
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+       
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+       
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -70,12 +101,11 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 
     //创建网页内容对象
-    UIImage *thumbURL = [UIImage imageNamed:@"ios-template-1024"];
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"蓝众创客注册分享" descr:@"欢迎使用蓝众创客" thumImage:thumbURL];
-    //设置网页地址
-    shareObject.webpageUrl = [NSString stringWithFormat:@"%@%@",Share_URL,[UserModel defaultUser].uname];
+    UIImage *thumbURL = self.picImageV.image;
 
     //分享消息对象设置分享内容对象
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    [shareObject setShareImage:thumbURL];
     messageObject.shareObject = shareObject;
 
     //调用分享接口

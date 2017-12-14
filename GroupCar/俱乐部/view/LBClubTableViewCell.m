@@ -23,7 +23,7 @@
 - (void)setModel:(GLClubModel *)model{
     _model = model;
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.event_img] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-    self.titleLabel.text = model.event_title;
+//    self.titleLabel.text = model.event_title;
     
 }
 

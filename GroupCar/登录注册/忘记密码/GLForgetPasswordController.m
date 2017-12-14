@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *codeTF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 @property (weak, nonatomic) IBOutlet UITextField *ensureTF;
+@property (strong, nonatomic)LoadWaitView *loadV;
 
 @end
 
@@ -52,11 +53,106 @@
 
 #pragma mark - 提交
 - (IBAction)submit:(id)sender {
+
+    if (self.phoneTF.text.length != 11 || ![predicateModel valiMobile:self.phoneTF.text]) {
+            [SVProgressHUD showErrorWithStatus:@"手机号输入不正确"];
+            return;
+        }
+   
+        if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 16) {
+            [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
+            return;
+        }
+        
+        if (self.ensureTF.text.length < 6 || self.ensureTF.text.length > 16) {
+            [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
+            return;
+        }
     
+    if (self.codeTF.text.length != 4 ) {
+        [SVProgressHUD showErrorWithStatus:@"请输入4位的验证码"];
+        return;
+    }
+   
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//
+//    dict[@"token"] = [UserModel defaultUser].token;
+//    dict[@"uid"] = [UserModel defaultUser].uid;
+//    dict[@"type"] = @"2";
+//    dict[@"oldpassword"] = @"2";
+//    dict[@"password"] = self.pwdTF.text;
+//    dict[@"phone"] = [UserModel defaultUser].phone;
+//    dict[@"confirmpwd"] = self.ensurePasswordTF.text;
+//    dict[@"verification"] = self.codeTF.text;
+//
+        [NetworkManager requestPOSTWithURLStr:KChangePassword_Interface paramDic:dict finish:^(id responseObject) {
+            
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                
+                [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                
+                [UIView animateWithDuration:0.2 animations:^{
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+                
+            }else{
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
 }
 
 #pragma mark - 获取验证码
 - (IBAction)getCode:(id)sender {
+    [self startTime];//获取倒计时
+    [NetworkManager requestPOSTWithURLStr:KGet_Code_Interface paramDic:@{@"phone":[UserModel defaultUser].phone} finish:^(id responseObject) {
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            [SVProgressHUD showSuccessWithStatus:@"发送成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+    } enError:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+}
+
+//获取倒计时
+-(void)startTime{
+    
+    __block int timeout=60; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout<=0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                [self.getCodeBtn setTitle:@"  重发验证码  " forState:UIControlStateNormal];
+                self.getCodeBtn.userInteractionEnabled = YES;
+                self.getCodeBtn.backgroundColor = [UIColor whiteColor];
+                self.getCodeBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+            });
+            
+        }else{
+            
+            int seconds = timeout % 61;
+            NSString *strTime = [NSString stringWithFormat:@"  %.2d秒后重新发送  ", seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.getCodeBtn setTitle:[NSString stringWithFormat:@"%@",strTime] forState:UIControlStateNormal];
+                self.getCodeBtn.userInteractionEnabled = NO;
+                self.getCodeBtn.backgroundColor = [UIColor lightGrayColor];
+                self.getCodeBtn.titleLabel.font = [UIFont systemFontOfSize:11];
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
     
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

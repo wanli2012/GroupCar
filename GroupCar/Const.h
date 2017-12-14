@@ -82,6 +82,11 @@
 #define KGet_ShopBanner_Interface @"Shop/ShopBanner"//获取商城轮播图
 #define KCollecte_goods_Interface @"Shop/ShopGoodsCollection"//商品收藏
 #define KShare_Image_Interface @"User/PartnerUserShare"//分享二维码
+#define KSet_Interface @"User/PartnerUserSetup"//设置
+#define KCity_Interface @"Deploy/PartnerAreas"//城市接口
+
+
+
 
 //H5页面链接
 #define H5_baseURL @"http://jj.51dztg.com/wecat/"
@@ -94,5 +99,10 @@
 #define H5_brandURL @"brand.html"
 #define H5_RechargeURL @"recharge.html"
 #define H5_Recharge_DelegateURL @"xy/register.html"
+#define H5_BE_DelegateURL @"pay.html"
+#define H5_CompanyURL @"company.html"
+#define H5_AgencyURL @"xy/agency.html"
+
+//http://jj.51dztg.com/wecat/xy/agency.html
 
 #endif /* Const_h */

@@ -27,10 +27,24 @@
     [self.webView loadRequest:request];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
     NSString *str = [NSString stringWithFormat:@"%@",request.URL];
-    if ([str containsString:@"index.html"] || [str containsString:@"club.html"] || [str containsString:@"collections.html"] || [str containsString:@"my.html"] || [str containsString:@"regist.html"]) {
+    
+    if ([str containsString:@"index.html"] ||
+        [str containsString:@"club.html"] ||
+        [str containsString:@"collections.html"] ||
+        [str containsString:@"my.html"] ||
+        [str containsString:@"regist.html"] ||
+        [str containsString:@"set.html"] ||
+        [str containsString:@"agent.html"] ||
+        [str containsString:@"login.html"]) {
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
     
@@ -42,19 +56,22 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     
-    NSLog(@"jsContext == %@",self.jsContext[@"collecte"]);
-    self.jsContext[@"collecte"] = self;
+//    self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+//
+//    NSLog(@"jsContext == %@",self.jsContext[@"collecte"]);
+//    self.jsContext[@"collecte"] = self;
+//
+//    self.jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
+//        context.exception = exceptionValue;
+//        NSLog(@"异常信息：%@", exceptionValue);
+//    };
     
-    self.jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
-        context.exception = exceptionValue;
-        NSLog(@"异常信息：%@", exceptionValue);
-    };
 }
 
-- (void)collecte {
-    NSLog(@"djklfjlsjflsj--------------------------f");
-}
+//
+//- (void)collecte {
+//    NSLog(@"djklfjlsjflsj--------------------------f");
+//}
 
 @end

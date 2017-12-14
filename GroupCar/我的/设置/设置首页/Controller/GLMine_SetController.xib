@@ -13,7 +13,10 @@
             <connections>
                 <outlet property="contentViewHeight" destination="uWa-P6-KKC" id="O9X-gN-7Dp"/>
                 <outlet property="contentViewWidth" destination="a1Q-YU-wet" id="uTJ-d9-u8N"/>
+                <outlet property="memoryLabel" destination="rVi-FZ-mlA" id="9tu-jA-kWb"/>
                 <outlet property="quitBtn" destination="dNz-cl-Vuc" id="dN4-1S-gsD"/>
+                <outlet property="servicePhoneLabel" destination="9Jy-ec-5td" id="aqU-fH-6o9"/>
+                <outlet property="versionLabel" destination="PUT-My-ebB" id="u44-LJ-7yM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -124,8 +127,8 @@
                                                 <constraint firstAttribute="height" constant="1" id="c2Z-nM-sQQ"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本2.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-My-ebB">
-                                            <rect key="frame" x="243" y="16" width="52" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-My-ebB">
+                                            <rect key="frame" x="275.5" y="16" width="19.5" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -163,14 +166,14 @@
                                                 <constraint firstAttribute="height" constant="1" id="ngX-db-O6R"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400-2666666" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jy-ec-5td">
-                                            <rect key="frame" x="195.5" y="16" width="99.5" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jy-ec-5td">
+                                            <rect key="frame" x="295" y="25" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="电话" translatesAutoresizingMaskIntoConstraints="NO" id="iiv-pk-GFT">
-                                            <rect key="frame" x="176.5" y="18" width="14" height="14"/>
+                                            <rect key="frame" x="276" y="18" width="14" height="14"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="VgF-kZ-1Br"/>
                                                 <constraint firstAttribute="width" constant="14" id="yNg-CE-W8O"/>
@@ -211,8 +214,8 @@
                                                 <constraint firstAttribute="height" constant="1" id="Fc9-4e-459"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="560M" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVi-FZ-mlA">
-                                            <rect key="frame" x="254.5" y="16" width="40.5" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00M" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVi-FZ-mlA">
+                                            <rect key="frame" x="251" y="16" width="44" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>

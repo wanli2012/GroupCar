@@ -145,7 +145,6 @@ static NSString *LBClub = @"LBClubTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     LBClubTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:LBClub forIndexPath:indexPath];
     cell.selectionStyle = 0;
     cell.model = self.models[indexPath.row];
@@ -164,7 +163,7 @@ static NSString *LBClub = @"LBClubTableViewCell";
     GLClubModel *model = self.models[indexPath.row];
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_ClubDetailURL];
     
-    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&event_id)=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.event_id];
+    webVC.url = [NSString stringWithFormat:@"%@?event_id=%@",baseUrl,model.event_id];
     
     [self.navigationController pushViewController:webVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;

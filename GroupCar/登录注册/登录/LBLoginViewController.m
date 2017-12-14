@@ -12,12 +12,12 @@
 #import "BasetabbarViewController.h"
 #import <WXApi.h>
 #import "GLRegister_InfoCompletionController.h"
+#import "BasetabbarViewController.h"
 
 @interface LBLoginViewController ()<WXApiDelegate>
 {
     BOOL _isWeixinLogin;
 }
-
 @property (weak, nonatomic) IBOutlet UIView *accountView;
 @property (weak, nonatomic) IBOutlet UIView *passwordView;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
@@ -56,8 +56,20 @@
 }
 
 - (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(self.sign == 1){
+        [UserModel defaultUser].loginstatus = NO;
+        [UserModel defaultUser].token = nil;
+        [UserModel defaultUser].user_id = nil;
+        [usermodelachivar achive];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        BasetabbarViewController *tabVC = [[BasetabbarViewController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabVC;
+        [tabVC setSelectedIndex:0];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
+
 
 - (IBAction)login:(id)sender {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -112,9 +124,12 @@
 
             [usermodelachivar achive];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshInterface" object:nil];
-            
+            if (self.sign == 1) {
+                BasetabbarViewController *tabVC = [[BasetabbarViewController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = tabVC;
+            }
             [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshInterface" object:nil];
             
         }else{
             
@@ -141,6 +156,7 @@
         req.scope = @"snsapi_userinfo" ;
         req.state = @"groupCar" ;
         [WXApi sendReq:req];
+
     }
 }
 

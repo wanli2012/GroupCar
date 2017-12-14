@@ -103,7 +103,7 @@
 
     GLWebViewController *webVC = [[GLWebViewController alloc] init];
   
-    webVC.url = [NSString stringWithFormat:@"%@",H5_Recharge_DelegateURL];
+    webVC.url = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_Recharge_DelegateURL];
     
     [self.navigationController pushViewController:webVC animated:YES];
 }

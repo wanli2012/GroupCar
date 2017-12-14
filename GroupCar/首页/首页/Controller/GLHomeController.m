@@ -13,10 +13,19 @@
 #import "GLWebViewController.h"
 #import "SDCycleScrollView.h"
 
-@interface GLHomeController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate,SDCycleScrollViewDelegate,GLHomeCellDelegate>
+//单选picker 和动画
+#import "GLSimpleSelectionPickerController.h"
+#import "editorMaskPresentationController.h"
+
+
+@interface GLHomeController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate,SDCycleScrollViewDelegate,GLHomeCellDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning>
+{
+    BOOL _ishidecotr;//判断是否隐藏弹出控制器
+}
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *searchView;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 
 @property (nonatomic, assign)NSInteger page;
 @property (strong, nonatomic)LoadWaitView *loadV;
@@ -26,9 +35,13 @@
 @property (nonatomic, strong)NSMutableArray *bannerModels;
 @property (nonatomic, strong)NSMutableArray *cateModels;
 @property (nonatomic, strong)NSDictionary *noticeDic;
+@property (nonatomic, strong)NSMutableArray *cityModels;
+@property (nonatomic, strong)NSMutableArray *cityNameArr;
+
+@property (nonatomic, copy)NSString *city_id;
 
 @property (nonatomic, strong)SDCycleScrollView *cycleScrollView;
-@property (strong, nonatomic)  NSString *app_Version;//当前版本号
+@property (strong, nonatomic)NSString *app_Version;//当前版本号
 
 
 @end
@@ -53,7 +66,7 @@
         [self postBanner:YES];
         [self postBrand:YES];
         [self postNotice:YES];
-        
+
     }];
     
     // 设置文字
@@ -68,24 +81,51 @@
     [self postBanner:YES];
     [self postBrand:YES];
     [self postNotice:YES];
-    
+
     //版本更新提示
-    
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     CFShow((__bridge CFTypeRef)(infoDictionary));
     // app版本
     _app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
-    [self Postpath:GET_VERSION];
+//    [self Postpath:GET_VERSION];
+    
     if (@available(iOS 11.0, *)) {
         self.collectionView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
         
     } else {
         self.automaticallyAdjustsScrollViewInsets = false;
-        // Fallback on earlier versions
+
     }
+    self.city_id = @"";
     
 }
+
+#pragma mark - 请求城市
+//- (void)postCity:(BOOL)isRefresh{
+//
+//    [NetworkManager requestPOSTWithURLStr:KCity_Interface paramDic:@{} finish:^(id responseObject) {
+//
+//        [self endRefresh];
+//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+//
+//            [self.cityModels removeAllObjects];
+//            for (NSDictionary *dic in responseObject[@"data"]) {
+//                GLHome_CityModel *model = [GLHome_CityModel mj_objectWithKeyValues:dic];
+//                [self.cityModels addObject:model];
+//            }
+//
+//        }else{
+//            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+//        }
+//
+//        [self.collectionView reloadData];
+//    } enError:^(NSError *error) {
+//
+//        [self endRefresh];
+//        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+//    }];
+//}
 
 #pragma mark - 请求品牌
 - (void)postBrand:(BOOL)isRefresh{
@@ -188,6 +228,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
     dict[@"uid"] = [UserModel defaultUser].user_id;
+    dict[@"city"] = self.city_id;
 
 //    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:KGet_ShopGoods_Interface paramDic:dict finish:^(id responseObject) {
@@ -237,6 +278,62 @@
     [self postRequest:YES];
 }
 
+#pragma mark - 城市选择
+- (IBAction)cityChoose:(id)sender {
+
+    if (self.cityModels.count != 0) {
+        [self popChooser:self.cityNameArr Title:@"请选择城市"];
+        return;
+    }
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+    [NetworkManager requestPOSTWithURLStr:KCity_Interface paramDic:@{} finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            
+            [self.cityModels removeAllObjects];
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                GLHome_CityModel *model = [GLHome_CityModel mj_objectWithKeyValues:dic];
+                [self.cityModels addObject:model];
+            }
+            [self.cityNameArr removeAllObjects];
+            for (GLHome_CityModel *model in self.cityModels) {
+                [self.cityNameArr addObject:model.name];
+            }
+            [self popChooser:self.cityNameArr Title:@"请选择职业"];
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+        [self.collectionView reloadData];
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+  
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+    
+}
+#pragma mark - 弹出单项选择器
+- (void)popChooser:(NSMutableArray *)dataArr Title:(NSString *)title{
+    
+    GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
+    vc.dataSourceArr = dataArr;
+    vc.titlestr = title;
+    __weak typeof(self)weakSelf = self;
+    vc.returnreslut = ^(NSInteger index){
+        
+        GLHome_CityModel *model = weakSelf.cityModels[index];
+        weakSelf.cityLabel.text = dataArr[index];
+        weakSelf.city_id = model.id;
+        [weakSelf postRequest:YES];
+        [weakSelf.collectionView reloadData];
+    };
+    
+    vc.transitioningDelegate = self;
+    vc.modalPresentationStyle = UIModalPresentationCustom;
+    [self presentViewController:vc animated:YES completion:nil];
+}
 #pragma mark - 收藏
 - (void)collecte:(NSInteger)index{
     
@@ -246,7 +343,6 @@
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].user_id;
     dict[@"goodsid"] = model.goods_id;
-//    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     
     if ([model.set integerValue] == 1) {//1已收藏 2没收藏
         [NetworkManager requestPOSTWithURLStr:KDel_Collection_Interface paramDic:dict finish:^(id responseObject) {
@@ -288,7 +384,6 @@
         }];
     }
     
-    
 }
 #pragma mark - 搜索
 - (IBAction)search:(id)sender {
@@ -297,7 +392,7 @@
 
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_SearhURL];
     
-    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id];
+    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&city_id=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,self.city_id];
     
     [self.navigationController pushViewController:webVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
@@ -358,41 +453,45 @@
 
 #pragma mark - SDCycleScrollViewDelegate 点击看大图
 /** 点击图片回调 */
-//- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
-//
-//    GLBusinessAdModel *adModel = self.adModels[index];
-//
-//    self.hidesBottomBarWhenPushed = YES;
-//
-//    GLBusiness_CertificationController *adVC = [[GLBusiness_CertificationController alloc] init];
-//    if([adModel.type integerValue] == 1){
-//
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+
+    GLHome_bannerModel *adModel = self.bannerModels[index];
+
+    self.hidesBottomBarWhenPushed = YES;
+
+    GLWebViewController *webVC = [[GLWebViewController alloc] init];
+    GLHomeModel *model = self.models[index];
+    
+    self.hidesBottomBarWhenPushed = NO;
+    //1自定义广告 2商品广告 3活动广告 4外部链接广告
+    if([adModel.type integerValue] == 1){
+
 //        adVC.navTitle = adModel.banner_title;
 //        adVC.url = [NSString stringWithFormat:@"%@%@",AD_URL,adModel.banner_id];
 //        [self.navigationController pushViewController:adVC animated:YES];
-//
-//    }else if([adModel.type integerValue] == 2){
-//
-//        GLMall_DetailController *detailVC = [[GLMall_DetailController alloc] init];
-//        detailVC.goods_id = adModel.z_id;
-//        [self.navigationController pushViewController:detailVC animated:YES];
-//
-//    }else if([adModel.type integerValue] == 3){
-//
-//        GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
-//        detailVC.item_id = adModel.z_id;
-//        [self.navigationController pushViewController:detailVC animated:YES];
-//
-//    }else{
-//        //        adVC.navTitle = adModel.banner_title;
-//        //        adVC.url = [NSString stringWithFormat:@"%@",adModel.url];
-//        //        [self.navigationController pushViewController:adVC animated:YES];
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:adModel.url]];
-//    }
-//
-//    self.hidesBottomBarWhenPushed = NO;
-//}
-//
+
+    }else if([adModel.type integerValue] == 2){
+
+        NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarDetailURL];
+        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&goodsid=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.goods_id];
+        
+        [self.navigationController pushViewController:webVC animated:YES];
+
+    }else if([adModel.type integerValue] == 3){
+
+        NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarDetailURL];
+        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&goodsid=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.goods_id];
+        
+        [self.navigationController pushViewController:webVC animated:YES];
+
+    }else{
+    
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:adModel.url]];
+    }
+
+    self.hidesBottomBarWhenPushed = NO;
+}
+
 ///** 图片滚动回调 */
 //- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
 //
@@ -446,6 +545,8 @@
         [myHeaderView addSubview:self.cycleScrollView];
 
     }
+    
+    myHeaderView.city_id = self.city_id;
     myHeaderView.cateModels = self.cateModels;
     myHeaderView.bannerModels = self.bannerModels;
     myHeaderView.noticeDic = self.noticeDic;
@@ -471,6 +572,66 @@
     return UIEdgeInsetsMake(0, 5, 0, 5);
 }
 
+#pragma mark - 动画的代理
+//动画
+- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{
+    
+    return [[editorMaskPresentationController alloc]initWithPresentedViewController:presented presentingViewController:presenting];
+    
+}
+//控制器创建执行的动画（返回一个实现UIViewControllerAnimatedTransitioning协议的类）
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    _ishidecotr=YES;
+    return self;
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    _ishidecotr=NO;
+    return self;
+}
+- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext{
+    
+    return 0.5;
+}
+-(void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext{
+    
+    [self chooseindustry:transitionContext];
+}
+-(void)chooseindustry:(id <UIViewControllerContextTransitioning>)transitionContext{
+    
+    if (_ishidecotr==YES) {
+        UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
+        toView.frame=CGRectMake(-kSCREEN_WIDTH, (kSCREEN_HEIGHT - 300)/2, kSCREEN_WIDTH - 40, 280);
+        toView.layer.cornerRadius = 6;
+        toView.clipsToBounds = YES;
+        [transitionContext.containerView addSubview:toView];
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            toView.frame=CGRectMake(20, (kSCREEN_HEIGHT - 300)/2, kSCREEN_WIDTH - 40, 280);
+            
+        } completion:^(BOOL finished) {
+            
+            [transitionContext completeTransition:YES]; //这个必须写,否则程序 认为动画还在执行中,会导致展示完界面后,无法处理用户的点击事件
+        }];
+    }else{
+        
+        UIView *toView = [transitionContext viewForKey:UITransitionContextFromViewKey];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            toView.frame=CGRectMake(20 + kSCREEN_WIDTH, (kSCREEN_HEIGHT - 300)/2, kSCREEN_WIDTH - 40, 280);
+            
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [toView removeFromSuperview];
+                [transitionContext completeTransition:YES]; //这个必须写,否则程序 认为动画还在执行中,会导致展示完界面后,无法处理用户的点击事件
+            }
+        }];
+    }
+}
+
 
 #pragma mark - 懒加载
 - (NSMutableArray *)models{
@@ -491,6 +652,19 @@
     }
     return _cateModels;
 }
+- (NSMutableArray *)cityModels{
+    if (!_cityModels) {
+        _cityModels = [NSMutableArray array];
+    }
+    return _cityModels;
+}
+- (NSMutableArray *)cityNameArr{
+    if (!_cityNameArr) {
+        _cityNameArr = [NSMutableArray array];
+    }
+    return _cityNameArr;
+}
+
 - (NodataView *)nodataV{
     if (!_nodataV) {
         _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;

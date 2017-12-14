@@ -19,3 +19,7 @@
 @implementation GLHome_CateModel
 
 @end
+
+@implementation GLHome_CityModel
+
+@end

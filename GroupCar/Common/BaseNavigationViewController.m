@@ -48,7 +48,7 @@
 {
     // Init views with rects with height and y pos
     
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     
     // Use autoresizing to restrict the bounds to the area that the titleview allows
     
@@ -93,7 +93,7 @@
     
     frame = titleLabel.frame;
     
-    frame.size.width = 120;
+    frame.size.width = 150;
     
     titleLabel.frame = frame;
     

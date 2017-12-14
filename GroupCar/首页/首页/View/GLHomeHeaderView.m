@@ -86,7 +86,7 @@
     GLWebViewController *webVC = [[GLWebViewController alloc] init];
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarListURL];
     
-    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id];
+    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&city_id=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,self.city_id];
     
     [[self viewController].navigationController pushViewController:webVC animated:YES];
     [self viewController].hidesBottomBarWhenPushed = NO;
@@ -184,15 +184,15 @@
         
         if (indexPath.row == self.cateModels.count - 1) {
             NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_brandURL];
-            webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id];
+            webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&city_id=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,self.city_id];
         }else{
             
             NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarListURL];
-            webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&cate_id=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.cate_id];
+            webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&cate_id=%@&city_id=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.cate_id,self.city_id];
         }
     }else{
         NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarListURL];
-        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&cate_id=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.cate_id];
+        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&cate_id=%@&city_id=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.cate_id,self.city_id];
     }
     
     [[self viewController].navigationController pushViewController:webVC animated:YES];

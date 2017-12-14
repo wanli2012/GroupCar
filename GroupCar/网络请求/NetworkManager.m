@@ -8,7 +8,8 @@
 
 #import "NetworkManager.h"
 #import "AFNetworking.h"
-
+#import "LBLoginViewController.h"
+#import "BaseNavigationViewController.h"
 
 @implementation NetworkManager
 // 参数urlStr表示网络请求url,paramDic表示请求参数,finish回调指网络请求成功回调,enError表示回调失败.
@@ -30,7 +31,7 @@
     
 }
 
-+ (void)requestPOSTWithURLStr:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
++ (void)requestPOSTWithURLStr:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject))finish enError:(void(^)(NSError *error))enError {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 
@@ -44,32 +45,29 @@
     
     [manager POST:urlStr1 parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-        finish(responseObject);
-        
-//        switch ([responseObject[@"code"] integerValue]) {
-//            case SUCCESS_CODE:
-//                finish(responseObject);
-//                break;
-//            case PAGE_ERROR_CODE:
-//                finish(responseObject);
-////                [MBProgressHUD showError:@"没有更多数据了"];
-//                break;
-//            case ERROR_CODE:
-////                [MBProgressHUD showSuccess:@"token错误"];
-//                finish(responseObject);
-//                break;
-//            case LOGIC_ERROR_CODE:
-//                finish(responseObject);
-//                break;
-//            case OVERDUE_CODE:
-////                [MBProgressHUD showSuccess:@"未登录请登录账户返回"];
-//                finish(responseObject);
-//                break;
-//
-//            default:
-//                finish(responseObject);
-//                break;
-//        }
+        switch ([responseObject[@"code"] integerValue]) {
+           
+            case OVERDUE_CODE:
+            {
+                if ([UserModel defaultUser].loginstatus) {
+
+                    [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+                }
+
+                LBLoginViewController *loginVC = [[LBLoginViewController alloc] init];
+                loginVC.sign = 1;
+                BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+                [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+                
+            }
+                break;
+
+            default:
+            {
+                finish(responseObject);
+            }
+                break;
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

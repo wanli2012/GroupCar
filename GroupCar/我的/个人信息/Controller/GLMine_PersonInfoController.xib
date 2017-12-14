@@ -89,20 +89,29 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="没那么简单" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wi-Zg-H5W">
-                                            <rect key="frame" x="66" y="16" width="299" height="18"/>
+                                            <rect key="frame" x="66" y="16" width="281" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mine_return" translatesAutoresizingMaskIntoConstraints="NO" id="hEx-dE-1KF">
+                                            <rect key="frame" x="357" y="17.5" width="8" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="dVy-28-KeB"/>
+                                                <constraint firstAttribute="width" constant="8" id="hmD-kU-f4H"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstItem="HVo-RL-zaO" firstAttribute="leading" secondItem="BNx-ae-Xjk" secondAttribute="leading" constant="10" id="2ru-0Y-SCZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="hEx-dE-1KF" secondAttribute="trailing" constant="10" id="3Hl-zp-9Ym"/>
                                         <constraint firstAttribute="trailing" secondItem="HVo-RL-zaO" secondAttribute="trailing" id="7tg-cd-CaC"/>
                                         <constraint firstItem="1Wi-Zg-H5W" firstAttribute="leading" secondItem="KWH-uf-i9q" secondAttribute="trailing" constant="10" id="E0K-Pw-RTV"/>
-                                        <constraint firstAttribute="trailing" secondItem="1Wi-Zg-H5W" secondAttribute="trailing" constant="10" id="GrP-hq-ay7"/>
+                                        <constraint firstItem="hEx-dE-1KF" firstAttribute="leading" secondItem="1Wi-Zg-H5W" secondAttribute="trailing" constant="10" id="HYe-Um-tjx"/>
                                         <constraint firstItem="1Wi-Zg-H5W" firstAttribute="centerY" secondItem="KWH-uf-i9q" secondAttribute="centerY" id="K2G-gK-wxA"/>
+                                        <constraint firstItem="hEx-dE-1KF" firstAttribute="centerY" secondItem="BNx-ae-Xjk" secondAttribute="centerY" id="adv-hq-aCB"/>
                                         <constraint firstAttribute="bottom" secondItem="HVo-RL-zaO" secondAttribute="bottom" id="cCe-ze-NAQ"/>
                                         <constraint firstItem="KWH-uf-i9q" firstAttribute="leading" secondItem="BNx-ae-Xjk" secondAttribute="leading" constant="10" id="gEC-c2-nGm"/>
                                         <constraint firstItem="KWH-uf-i9q" firstAttribute="centerY" secondItem="BNx-ae-Xjk" secondAttribute="centerY" id="rTa-T4-r6s"/>
@@ -278,5 +287,6 @@
     </objects>
     <resources>
         <image name="Headportrait" width="50" height="50"/>
+        <image name="Mine_return" width="7" height="15"/>
     </resources>
 </document>

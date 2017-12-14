@@ -85,8 +85,8 @@
     
     /* 支付宝的appKey */
     //    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_AlipaySession appKey:@"2015111700822536" appSecret:nil redirectURL:nil];
-    
 }
+
 // 支持所有iOS系统
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -98,6 +98,7 @@
     }
     return result;
 }
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
@@ -106,20 +107,29 @@
     }
     return result;
 }
+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
 
     return [WXApi handleOpenURL:url delegate:self];
-
 }
 
 -(void) onReq:(BaseReq*)req{
-    
-}
--(void) onResp:(SendAuthResp*)resp{
-
-    [self getToken:resp.code];
 
 }
+
+-(void) onResp:(BaseReq*)resp{
+
+    if ([resp isKindOfClass:[SendAuthResp class]]) {
+        SendAuthResp *req = (SendAuthResp *)resp;
+        [self getToken:req.code];
+    }
+}
+
+//-(void) onResp:(SendAuthResp*)resp{
+//
+//    [self getToken:resp.code];
+//
+//}
 
 - (void)getToken:(NSString *)code{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

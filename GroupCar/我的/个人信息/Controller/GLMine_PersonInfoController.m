@@ -68,18 +68,45 @@
         [_loadV removeloadview];
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
-
 }
+
+//刷新界面
 - (void)refresh{
     
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:self.model.portrait] placeholderImage:[UIImage imageNamed:@"Headportrait"]];
     if (self.picImageV.image == nil) {
         self.picImageV.image = [UIImage imageNamed:@"Headportrait"];
     }
-    self.nameLabel.text = self.model.nickname;
-    self.IDLabel.text = self.model.uname;
-    self.recommendLabel.text = self.model.gnickname;
-    self.recommendIDLabel.text = self.model.gname;
+    
+    if(self.model.nickname.length == 0){
+        self.nameLabel.text = @"点击添加昵称";
+        self.nameLabel.textColor = [UIColor lightGrayColor];
+    }else{
+        self.nameLabel.text = self.model.nickname;
+        self.nameLabel.textColor = [UIColor darkGrayColor];
+    }
+    
+    if(self.model.uname.length == 0){
+        self.IDLabel.text = @"暂无";
+    }else{
+        
+        self.IDLabel.text = self.model.uname;
+    }
+    
+    if(self.model.gnickname.length == 0){
+        self.recommendLabel.text = @"暂无";
+    }else{
+        
+        self.recommendLabel.text = self.model.gnickname;
+    }
+    
+    if(self.model.gname.length == 0){
+        self.recommendIDLabel.text = @"暂无";
+    }else{
+        
+        self.recommendIDLabel.text = self.model.gname;
+    }
+
     
 }
 #pragma mark - 修改昵称

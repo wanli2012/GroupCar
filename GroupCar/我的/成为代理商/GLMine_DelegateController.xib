@@ -18,6 +18,7 @@
                 <outlet property="contentviewWidth" destination="Aid-bv-7yy" id="T6o-ue-wVa"/>
                 <outlet property="scrollView" destination="2PW-Q7-qgD" id="KX3-rT-Dtj"/>
                 <outlet property="signImageV" destination="nOe-R7-C10" id="GzK-5W-xmU"/>
+                <outlet property="submitBtn" destination="nVf-ZO-GGI" id="kJt-5n-yzc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -99,19 +100,32 @@
                                 <constraint firstAttribute="height" constant="11" id="RMa-un-ZgY"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我同意《代理商准则》" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVV-FD-d5y">
-                            <rect key="frame" x="26" y="13.5" width="123" height="14.5"/>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVV-FD-d5y">
+                            <rect key="frame" x="26" y="13.5" width="37" height="14.5"/>
                             <gestureRecognizers/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" contentMode="left" verticalHuggingPriority="251" text="《代理商准则》" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mm-Xx-NDh">
+                            <rect key="frame" x="63" y="13.5" width="87" height="14.5"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.40858465430000002" green="0.40212076899999999" blue="0.9351471066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="JO2-oj-tBo" appends="YES" id="4Ra-Sr-47G"/>
+                            </connections>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="3Mm-Xx-NDh" secondAttribute="trailing" id="IST-9x-T1X"/>
+                        <constraint firstItem="3Mm-Xx-NDh" firstAttribute="centerY" secondItem="EVV-FD-d5y" secondAttribute="centerY" id="Pfm-VG-neh"/>
                         <constraint firstItem="nOe-R7-C10" firstAttribute="centerY" secondItem="rfN-Qh-USw" secondAttribute="centerY" id="USd-mk-NSW"/>
                         <constraint firstItem="nOe-R7-C10" firstAttribute="leading" secondItem="rfN-Qh-USw" secondAttribute="leading" constant="10" id="Zyo-sV-oij"/>
+                        <constraint firstItem="3Mm-Xx-NDh" firstAttribute="leading" secondItem="EVV-FD-d5y" secondAttribute="trailing" id="eJY-1M-5JZ"/>
                         <constraint firstAttribute="width" constant="150" id="g20-Fa-RvW"/>
                         <constraint firstAttribute="height" constant="40" id="gyd-lC-wVq"/>
                         <constraint firstItem="EVV-FD-d5y" firstAttribute="centerY" secondItem="rfN-Qh-USw" secondAttribute="centerY" id="jSX-L1-dQG"/>
@@ -140,6 +154,11 @@
         <tapGestureRecognizer id="KFZ-vC-ES7" userLabel="是否同意代理商准则">
             <connections>
                 <action selector="isAgreeProtocol:" destination="-1" id="Bd1-G2-3uW"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="JO2-oj-tBo" userLabel="代理商准则">
+            <connections>
+                <action selector="protocolContent:" destination="-1" id="EfA-iZ-fJu"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

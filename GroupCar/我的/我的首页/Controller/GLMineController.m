@@ -19,6 +19,8 @@
 #import "GLMine_RealnameController.h"//实名认证
 #import "GLMine_DelegateController.h"//成为代理商
 #import "GLWebViewController.h"
+#import "LBLoginViewController.h"
+#import "BaseNavigationViewController.h"
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -108,6 +110,7 @@
                 
                 [usermodelachivar achive];
             }
+ 
         }else{
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
@@ -116,8 +119,8 @@
     } enError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
-    
 }
+
 #pragma mark - 头视图赋值
 - (void)setupHeader{
     
@@ -160,6 +163,11 @@
 
 #pragma mark - 成为代理商
 - (IBAction)becomeDelegate:(id)sender {
+    
+    if ([[UserModel defaultUser].status integerValue] == 1) {//用户是否实名认证 1未认证 2已认证
+        [SVProgressHUD showErrorWithStatus:@"请先实名认证"];
+        return;
+    }
 
     self.hidesBottomBarWhenPushed = YES;
     GLMine_DelegateController *delegateVC = [[GLMine_DelegateController alloc] init];
@@ -181,12 +189,6 @@
 
 #pragma mark - 我要充值
 - (IBAction)recharge:(id)sender {
-    
-//    self.hidesBottomBarWhenPushed = YES;
-//    GLMine_RechargeController *rechargeVC = [[GLMine_RechargeController alloc] init];
-//    rechargeVC.navigationItem.title = @"充值";
-//    [self.navigationController pushViewController:rechargeVC animated:YES];
-//    self.hidesBottomBarWhenPushed = NO;
 
     self.hidesBottomBarWhenPushed = YES;
     GLWebViewController *webVC = [[GLWebViewController alloc] init];

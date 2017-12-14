@@ -24,6 +24,8 @@
 @property (nonatomic, strong)NSMutableArray <GLHome_CateModel *>*cateModels;
 @property (nonatomic, strong)NSDictionary *noticeDic;
 
+@property (nonatomic, copy)NSString *city_id;
+
 //@property (nonatomic, weak)id <GLHomeHeaderViewDelegate>delegate;
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "GLMine_DelegateController.h"
+#import "GLWebViewController.h"
 
 @interface GLMine_DelegateController ()
 {
@@ -21,9 +22,11 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgViewHeight;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @property (strong, nonatomic)LoadWaitView *loadV;
 @property (nonatomic, copy)NSString *delegeteContent;
+@property (nonatomic, copy)NSString *u_group;
 
 @end
 
@@ -38,18 +41,29 @@
     self.bgView.layer.shadowOpacity = 0.6f;
     self.bgView.layer.shadowRadius = 5.f;
     self.bgView.layer.shadowOffset = CGSizeMake(0,0);
-    
-    [self postRequest];
   
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     self.navigationController.navigationBar.hidden = NO;
+    [self postRequest];
     
 }
+
 #pragma mark - 设置协议内容
 - (void)setContent{
+    
+    if ([self.u_group integerValue] == 2) {//1代表用户还是会员 2是个人代理
+        self.submitBtn.backgroundColor = [UIColor lightGrayColor];
+        self.submitBtn.enabled = NO;
+        [self.submitBtn setTitle:@"已成为代理商" forState:UIControlStateNormal];
+    }else{
+        self.submitBtn.backgroundColor = kMain_Color;
+        self.submitBtn.enabled = YES;
+        [self.submitBtn setTitle:@"立刻成为代理商" forState:UIControlStateNormal];
+    }
     
     self.contentLabel.text = self.delegeteContent;
     
@@ -60,8 +74,8 @@
     }else{
         self.bgViewHeight.constant = rect.size.height + 75;
     }
-
 }
+
 #pragma mark - 请求数据
 - (void)postRequest {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -74,7 +88,10 @@
     [NetworkManager requestPOSTWithURLStr:KGet_Delegate_Interface paramDic:dict finish:^(id responseObject) {
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            
             self.delegeteContent = responseObject[@"data"][@"agreement"];
+            self.u_group = responseObject[@"data"][@"u_group"];
+            
             [self setContent];
         }else{
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
@@ -85,6 +102,7 @@
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 }
+
 #pragma mark - 是否同意协议
 - (IBAction)isAgreeProtocol:(id)sender {
     _isAgreeProtocol = !_isAgreeProtocol;
@@ -94,10 +112,28 @@
         self.signImageV.image = [UIImage imageNamed:@"nochoice"];
     }
 }
+#pragma mark - 代理商准则
+- (IBAction)protocolContent:(id)sender {
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLWebViewController *webVC = [[GLWebViewController alloc] init];
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_AgencyURL];
+    
+    webVC.url = [NSString stringWithFormat:@"%@",baseUrl];
+    
+    [self.navigationController pushViewController:webVC animated:YES];
+}
 
 #pragma mark - 成为代理商
 - (IBAction)beDelegate:(id)sender {
+    self.hidesBottomBarWhenPushed = YES;
+    GLWebViewController *webVC = [[GLWebViewController alloc] init];
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_BE_DelegateURL];
     
+    webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id];
+    
+    [self.navigationController pushViewController:webVC animated:YES];
+
 }
 
 @end

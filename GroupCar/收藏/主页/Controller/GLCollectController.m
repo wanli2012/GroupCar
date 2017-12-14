@@ -9,6 +9,7 @@
 #import "GLCollectController.h"
 #import "GLCollectCell.h"
 #import "GLCollectModel.h"
+#import "GLWebViewController.h"
 
 @interface GLCollectController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -102,11 +103,6 @@
                     
                     [self.models addObject:model];
                 }
-            }
-        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
-            
-            if (self.models.count != 0) {
-                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
         }else{
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
@@ -297,23 +293,37 @@
     return 120;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    GLCollectModel *model = self.models[indexPath.row];
-    model.isSelect = !model.isSelect;
-    
-    NSInteger selectNum = 0;
-    
-    for (GLCollectModel *model in self.models) {
-        if (model.isSelect) {
-            selectNum += 1;
+    if (self.editBtn.isSelected) {
+        
+        GLCollectModel *model = self.models[indexPath.row];
+        model.isSelect = !model.isSelect;
+        
+        NSInteger selectNum = 0;
+        
+        for (GLCollectModel *model in self.models) {
+            if (model.isSelect) {
+                selectNum += 1;
+            }
         }
-    }
-    
-    if (selectNum == self.models.count) {
-        self.selectAllBtn.selected = YES;
-        [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-yes-r"] forState:UIControlStateNormal];
+        
+        if (selectNum == self.models.count) {
+            self.selectAllBtn.selected = YES;
+            [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-yes-r"] forState:UIControlStateNormal];
+        }else{
+            self.selectAllBtn.selected = NO;
+            [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-no-r"] forState:UIControlStateNormal];
+        }
     }else{
-        self.selectAllBtn.selected = NO;
-        [self.selectAllBtn setImage:[UIImage imageNamed:@"choice-no-r"] forState:UIControlStateNormal];
+        
+        self.hidesBottomBarWhenPushed = YES;
+        GLWebViewController *webVC = [[GLWebViewController alloc] init];
+        NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarDetailURL];
+        GLCollectModel *model = self.models[indexPath.row];
+        
+        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&goodsid=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.goodsid];
+        
+        [self.navigationController pushViewController:webVC animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
     }
     
     

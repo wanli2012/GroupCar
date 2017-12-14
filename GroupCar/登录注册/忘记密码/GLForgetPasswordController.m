@@ -53,64 +53,69 @@
 
 #pragma mark - 提交
 - (IBAction)submit:(id)sender {
-
+    
     if (self.phoneTF.text.length != 11 || ![predicateModel valiMobile:self.phoneTF.text]) {
-            [SVProgressHUD showErrorWithStatus:@"手机号输入不正确"];
-            return;
-        }
-   
-        if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 16) {
-            [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
-            return;
-        }
-        
-        if (self.ensureTF.text.length < 6 || self.ensureTF.text.length > 16) {
-            [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
-            return;
-        }
+        [SVProgressHUD showErrorWithStatus:@"手机号输入不正确"];
+        return;
+    }
+    
+    if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 16) {
+        [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
+        return;
+    }
+    
+    if (self.ensureTF.text.length < 6 || self.ensureTF.text.length > 16) {
+        [SVProgressHUD showErrorWithStatus:@"请设置6 ~ 16位密码"];
+        return;
+    }
     
     if (self.codeTF.text.length != 4 ) {
         [SVProgressHUD showErrorWithStatus:@"请输入4位的验证码"];
         return;
     }
-   
+    
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//
-//    dict[@"token"] = [UserModel defaultUser].token;
-//    dict[@"uid"] = [UserModel defaultUser].uid;
-//    dict[@"type"] = @"2";
-//    dict[@"oldpassword"] = @"2";
-//    dict[@"password"] = self.pwdTF.text;
-//    dict[@"phone"] = [UserModel defaultUser].phone;
-//    dict[@"confirmpwd"] = self.ensurePasswordTF.text;
-//    dict[@"verification"] = self.codeTF.text;
-//
-        [NetworkManager requestPOSTWithURLStr:KChangePassword_Interface paramDic:dict finish:^(id responseObject) {
+    
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].user_id;
+    dict[@"type"] = @"2";
+    dict[@"password"] = self.passwordTF.text;
+    dict[@"phone"] = self.phoneTF.text;
+    dict[@"confirmpwd"] = self.ensureTF.text;
+    dict[@"verification"] = self.codeTF.text;
+    
+    [NetworkManager requestPOSTWithURLStr:KChangePassword_Interface paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
-            [_loadV removeloadview];
-            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            [SVProgressHUD showSuccessWithStatus:@"找回密码成功"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-                
-                [UIView animateWithDuration:0.2 animations:^{
-                    
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
-                
-            }else{
-                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-            }
-        } enError:^(NSError *error) {
-            [_loadV removeloadview];
-            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-        }];
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
 }
 
 #pragma mark - 获取验证码
 - (IBAction)getCode:(id)sender {
+    
+    if (self.phoneTF.text.length != 11 || ![predicateModel valiMobile:self.phoneTF.text]) {
+        [SVProgressHUD showErrorWithStatus:@"手机号输入不正确"];
+        return;
+    }
+    
     [self startTime];//获取倒计时
-    [NetworkManager requestPOSTWithURLStr:KGet_Code_Interface paramDic:@{@"phone":[UserModel defaultUser].phone} finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:KGet_Code_Interface paramDic:@{@"phone":self.phoneTF.text} finish:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             [SVProgressHUD showSuccessWithStatus:@"发送成功"];
         }else{

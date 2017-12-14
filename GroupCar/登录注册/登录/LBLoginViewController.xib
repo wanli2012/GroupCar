@@ -211,7 +211,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="忘记密码">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.40858465433120728" green="0.40212076902389526" blue="0.93514710664749146" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="forgetPassword:" destination="-1" eventType="touchUpInside" id="AXX-NY-6qJ"/>

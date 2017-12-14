@@ -279,9 +279,9 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 
 + (void)showErrorWithStatus:(NSString*)status {
     
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];//设置HUD的Style
-    [SVProgressHUD setForegroundColor:[UIColor darkGrayColor]];//设置HUD和文本的颜色
-    [SVProgressHUD setBackgroundColor:[UIColor groupTableViewBackgroundColor]];//设置HUD的背景颜色
+//    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];//设置HUD的Style
+//    [SVProgressHUD setForegroundColor:[UIColor darkGrayColor]];//设置HUD和文本的颜色
+//    [SVProgressHUD setBackgroundColor:[UIColor groupTableViewBackgroundColor]];//设置HUD的背景颜色
     
     [self showImage:[self sharedView].errorImage status:status];
 }
@@ -805,6 +805,11 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 
 - (void)showImage:(UIImage*)image status:(NSString*)status duration:(NSTimeInterval)duration {
     __weak SVProgressHUD *weakSelf = self;
+    
+    [weakSelf setDefaultStyle:SVProgressHUDStyleCustom];//设置HUD的Style
+    [weakSelf setForegroundColor:[UIColor darkGrayColor]];//设置HUD和文本的颜色
+    [weakSelf setBackgroundColor:[UIColor groupTableViewBackgroundColor]];//设置HUD的背景颜色
+    
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         __strong SVProgressHUD *strongSelf = weakSelf;
         if(strongSelf){

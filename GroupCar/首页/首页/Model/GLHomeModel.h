@@ -38,6 +38,14 @@
 
 @property (nonatomic, strong)UIImage *pic;
 
+
+@end
+
+@interface GLHome_CityModel : NSObject
+
+@property (nonatomic, copy)NSString *id;//品牌ID
+@property (nonatomic, copy)NSString *name;//品牌名
+
 @end
 
 

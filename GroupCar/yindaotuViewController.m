@@ -106,10 +106,10 @@
     if (!_doneBt) {
         _doneBt=[[UIButton alloc]initWithFrame:CGRectMake((kSCREEN_WIDTH-150)/2,kSCREEN_HEIGHT-55, 150, 45)];
         [_doneBt setTitle:@"立即进入" forState:UIControlStateNormal];
-        [_doneBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_doneBt setTitleColor:kMain_Color forState:UIControlStateNormal];
         _doneBt.titleLabel.font=[UIFont systemFontOfSize:17];
-        _doneBt.backgroundColor=[UIColor clearColor];
-        _doneBt.layer.borderColor = [UIColor whiteColor].CGColor;
+        _doneBt.backgroundColor=[UIColor whiteColor];
+        _doneBt.layer.borderColor = kMain_Color.CGColor;
         _doneBt.layer.borderWidth = 1;
         _doneBt.layer.cornerRadius = 4;
         _doneBt.clipsToBounds = YES;

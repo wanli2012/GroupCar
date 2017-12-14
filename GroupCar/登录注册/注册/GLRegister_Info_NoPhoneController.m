@@ -7,6 +7,7 @@
 //
 
 #import "GLRegister_Info_NoPhoneController.h"
+#import "GLWebViewController.h"
 
 @interface GLRegister_Info_NoPhoneController ()
 {
@@ -47,8 +48,12 @@
 
 //注册协议
 - (IBAction)registerProtocol:(id)sender {
-    NSLog(@"注册协议");
+   
+    GLWebViewController *webVC = [[GLWebViewController alloc] init];
     
+    webVC.url = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_Recharge_DelegateURL];
+    
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 //是否勾选协议

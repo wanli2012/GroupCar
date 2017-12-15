@@ -102,6 +102,7 @@
 #define H5_BE_DelegateURL @"pay.html"
 #define H5_CompanyURL @"company.html"
 #define H5_AgencyURL @"xy/agency.html"
+#define H5_BannerDetailURL @"bannerDetail.html"
 
 //http://jj.51dztg.com/wecat/xy/agency.html
 

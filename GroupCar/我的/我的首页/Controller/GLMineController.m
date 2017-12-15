@@ -244,16 +244,16 @@
             break;
         case 1:
         {
-            GLMine_SetController * setVC = [[GLMine_SetController alloc] init];
-            setVC.navigationItem.title = @"设置";
-            [self.navigationController pushViewController:setVC animated:YES];
+            GLMine_RealnameController *realNameVC = [[GLMine_RealnameController alloc] init];
+            realNameVC.navigationItem.title = @"实名认证";
+            [self.navigationController pushViewController:realNameVC animated:YES];
         }
             break;
         case 2:
         {
-            GLMine_RealnameController *realNameVC = [[GLMine_RealnameController alloc] init];
-            realNameVC.navigationItem.title = @"实名认证";
-            [self.navigationController pushViewController:realNameVC animated:YES];
+            GLMine_SetController * setVC = [[GLMine_SetController alloc] init];
+            setVC.navigationItem.title = @"设置";
+            [self.navigationController pushViewController:setVC animated:YES];
         }
             
         default:
@@ -266,14 +266,14 @@
 #pragma mark - 懒加载
 -(NSArray*)arrList{
     if (!_arrList) {
-        _arrList = @[@"推荐好友",@"设置",@"实名认证"];
+        _arrList = @[@"推荐好友",@"实名认证",@"设置"];
     }
     return _arrList;
 }
 
 - (NSArray *)imageArr{
     if (!_imageArr) {
-        _imageArr = @[@"推荐好友",@"Setup",@"实名认证"];
+        _imageArr = @[@"推荐好友",@"实名认证",@"Setup"];
     }
     return _imageArr;
 }

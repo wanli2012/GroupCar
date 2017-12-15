@@ -296,11 +296,16 @@
                 GLHome_CityModel *model = [GLHome_CityModel mj_objectWithKeyValues:dic];
                 [self.cityModels addObject:model];
             }
+            GLHome_CityModel *allModel = [[GLHome_CityModel alloc] init];
+            allModel.name = @"全部";
+            allModel.id = @"";
+            [self.cityModels addObject:allModel];
+            
             [self.cityNameArr removeAllObjects];
             for (GLHome_CityModel *model in self.cityModels) {
                 [self.cityNameArr addObject:model.name];
             }
-            [self popChooser:self.cityNameArr Title:@"请选择职业"];
+            [self popChooser:self.cityNameArr Title:@"请选择城市"];
             
         }else{
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
@@ -460,27 +465,28 @@
     self.hidesBottomBarWhenPushed = YES;
 
     GLWebViewController *webVC = [[GLWebViewController alloc] init];
-    GLHomeModel *model = self.models[index];
     
     self.hidesBottomBarWhenPushed = NO;
     //1自定义广告 2商品广告 3活动广告 4外部链接广告
     if([adModel.type integerValue] == 1){
-
-//        adVC.navTitle = adModel.banner_title;
-//        adVC.url = [NSString stringWithFormat:@"%@%@",AD_URL,adModel.banner_id];
-//        [self.navigationController pushViewController:adVC animated:YES];
+        
+        NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_BannerDetailURL];
+        webVC.url = [NSString stringWithFormat:@"%@?bid=%@&appPort=1",baseUrl,adModel.banner_id];
+        
+        [self.navigationController pushViewController:webVC animated:YES];
 
     }else if([adModel.type integerValue] == 2){
 
         NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarDetailURL];
-        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&goodsid=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.goods_id];
+        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&goodsid=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,adModel.z_id];
         
         [self.navigationController pushViewController:webVC animated:YES];
 
     }else if([adModel.type integerValue] == 3){
 
-        NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_CarDetailURL];
-        webVC.url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&appPort=1&goodsid=%@",baseUrl,[UserModel defaultUser].token,[UserModel defaultUser].user_id,model.goods_id];
+        NSString *baseUrl = [NSString stringWithFormat:@"%@%@",H5_baseURL,H5_ClubDetailURL];
+        
+        webVC.url = [NSString stringWithFormat:@"%@?event_id=%@",baseUrl,adModel.z_id];
         
         [self.navigationController pushViewController:webVC animated:YES];
 

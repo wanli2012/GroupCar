@@ -20,6 +20,8 @@
 
     self.picImageV.layer.cornerRadius = (kSCREEN_WIDTH -60)/5/2;
     
+    self.picImageV.layer.borderColor = kMain_Color.CGColor;
+    self.picImageV.layer.borderWidth = 2.f;
     
 }
 

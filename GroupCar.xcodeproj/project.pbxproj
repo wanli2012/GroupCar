@@ -473,7 +473,6 @@
 			isa = PBXGroup;
 			children = (
 				4A09C14D1FD531810066756B /* Controller */,
-				4A09C1511FD531810066756B /* Model */,
 				4A09C1521FD531810066756B /* View */,
 			);
 			path = "设置首页";
@@ -487,13 +486,6 @@
 				4ADB9BB91FD7EC8D00AC7B08 /* GLMine_SetController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A09C1511FD531810066756B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		4A09C1521FD531810066756B /* View */ = {

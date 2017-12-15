@@ -25,6 +25,7 @@
     
     self.nameLabel.font = [UIFont systemFontOfSize:11 * autoSizeScaleX];
     self.priceLabel.font = [UIFont systemFontOfSize:15 * autoSizeScaleX];
+    
 }
 
 - (void)setModel:(GLHomeModel *)model{

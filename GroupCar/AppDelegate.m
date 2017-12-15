@@ -42,9 +42,7 @@
     UMConfigInstance.appKey = USHARE_APPKEY;
     UMConfigInstance.channelId = @"App Store";
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK
-    
-//    [WXApi registerApp:WEIXIN_APPKEY];
-    
+
     BaseNavigationViewController *loginNav = [[BaseNavigationViewController alloc] initWithRootViewController:[[LBLoginViewController alloc] init]];
     self.window.rootViewController = loginNav;
     
@@ -113,10 +111,6 @@
     return [WXApi handleOpenURL:url delegate:self];
 }
 
--(void) onReq:(BaseReq*)req{
-
-}
-
 -(void) onResp:(BaseReq*)resp{
 
     if ([resp isKindOfClass:[SendAuthResp class]]) {
@@ -124,12 +118,6 @@
         [self getToken:req.code];
     }
 }
-
-//-(void) onResp:(SendAuthResp*)resp{
-//
-//    [self getToken:resp.code];
-//
-//}
 
 - (void)getToken:(NSString *)code{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

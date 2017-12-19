@@ -78,11 +78,15 @@
 -(NSArray*)imageArr{
 
     if (!_imageArr) {
-        _imageArr=[NSArray arrayWithObjects:[UIImage imageNamed:@"progress_1.png"],[UIImage imageNamed:@"progress_2.png"],[UIImage imageNamed:@"progress_3.png"],[UIImage imageNamed:@"progress_4.png"],[UIImage imageNamed:@"progress_5.png"],[UIImage imageNamed:@"progress_6.png"],[UIImage imageNamed:@"progress_7.png"],[UIImage imageNamed:@"progress_8.png"], nil];
+        NSMutableArray *arr = [NSMutableArray array];
+        for(int i = 1; i < 44 ;i ++){
+            NSString *str = [NSString stringWithFormat:@"%zd.png",i];
+            [arr addObject:[UIImage imageNamed:str]];
+        }
+        _imageArr = arr;
         
     }
     return _imageArr;
-
 }
 
 @end

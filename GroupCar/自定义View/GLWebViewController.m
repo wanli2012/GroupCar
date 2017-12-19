@@ -54,13 +54,17 @@
     }
     
     if([str hasPrefix:@"mm://"]){
-        
-        NSString *http = @"http://";
-        
-        NSString *url = [http stringByAppendingFormat:@"%@",[str substringFromIndex:5]];
-        
-        self.shareUrl = url;
-        [self share:url];
+        if ([str containsString:@"sc.html"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GLWebViewNotification" object:nil];
+        }else{
+            
+            NSString *http = @"http://";
+            
+            NSString *url = [http stringByAppendingFormat:@"%@",[str substringFromIndex:5]];
+            
+            self.shareUrl = url;
+            [self share:url];
+        }
         return NO;
     }
     

@@ -63,9 +63,9 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf postRequest:YES];
-        [self postBanner:YES];
-        [self postBrand:YES];
-        [self postNotice:YES];
+        [weakSelf postBanner:YES];
+        [weakSelf postBrand:YES];
+        [weakSelf postNotice:YES];
 
     }];
     
@@ -99,33 +99,14 @@
     }
     self.city_id = @"";
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"GLWebViewNotification" object:nil];
+    
 }
 
-#pragma mark - 请求城市
-//- (void)postCity:(BOOL)isRefresh{
-//
-//    [NetworkManager requestPOSTWithURLStr:KCity_Interface paramDic:@{} finish:^(id responseObject) {
-//
-//        [self endRefresh];
-//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
-//
-//            [self.cityModels removeAllObjects];
-//            for (NSDictionary *dic in responseObject[@"data"]) {
-//                GLHome_CityModel *model = [GLHome_CityModel mj_objectWithKeyValues:dic];
-//                [self.cityModels addObject:model];
-//            }
-//
-//        }else{
-//            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-//        }
-//
-//        [self.collectionView reloadData];
-//    } enError:^(NSError *error) {
-//
-//        [self endRefresh];
-//        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-//    }];
-//}
+#pragma mark - 刷新
+- (void)refresh{
+    [self postRequest:YES];
+}
 
 #pragma mark - 请求品牌
 - (void)postBrand:(BOOL)isRefresh{
@@ -225,21 +206,23 @@
 
 #pragma mark - 请求数据
 - (void)postRequest:(BOOL)isRefresh{
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
     dict[@"uid"] = [UserModel defaultUser].user_id;
     dict[@"city"] = self.city_id;
 
-//    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:KGet_ShopGoods_Interface paramDic:dict finish:^(id responseObject) {
         [_loadV removeloadview];
         [self endRefresh];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            
+            if(isRefresh){
+                [self.models removeAllObjects];
+            }
+            
             if ([responseObject[@"data"] count] != 0) {
                 
-                if(isRefresh){
-                    [self.models removeAllObjects];
-                }
                 for (NSDictionary *dic in responseObject[@"data"]) {
                     GLHomeModel * model = [GLHomeModel mj_objectWithKeyValues:dic];
 
@@ -275,7 +258,7 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-    [self postRequest:YES];
+//    [self postRequest:YES];
 }
 
 #pragma mark - 城市选择
@@ -465,8 +448,7 @@
     self.hidesBottomBarWhenPushed = YES;
 
     GLWebViewController *webVC = [[GLWebViewController alloc] init];
-    
-    self.hidesBottomBarWhenPushed = NO;
+
     //1自定义广告 2商品广告 3活动广告 4外部链接广告
     if([adModel.type integerValue] == 1){
         
@@ -497,11 +479,6 @@
 
     self.hidesBottomBarWhenPushed = NO;
 }
-
-///** 图片滚动回调 */
-//- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
-//
-//}
 
 #pragma mark - UICollectionViewDelegate
 

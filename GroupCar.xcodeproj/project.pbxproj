@@ -141,6 +141,7 @@
 		4ADB9BC61FD7F3D700AC7B08 /* GLMine_Set_ModifyPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADB9BC41FD7F3D700AC7B08 /* GLMine_Set_ModifyPasswordController.m */; };
 		4ADB9BC71FD7F3D700AC7B08 /* GLMine_Set_ModifyPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADB9BC51FD7F3D700AC7B08 /* GLMine_Set_ModifyPasswordController.xib */; };
 		4ADB9BCC1FD7F99200AC7B08 /* GLMine_Set_PhoneModifyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADB9BCA1FD7F99200AC7B08 /* GLMine_Set_PhoneModifyController.m */; };
+		4AECCB231FE7A70000CFAFAA /* 加载动画.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AECCB221FE7A70000CFAFAA /* 加载动画.xcassets */; };
 		4AF9CA4D1FD68B8C00F4DC6B /* GLMine_SetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9CA4B1FD68B8C00F4DC6B /* GLMine_SetCell.m */; };
 		4AF9CA4E1FD68B8C00F4DC6B /* GLMine_SetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9CA4C1FD68B8C00F4DC6B /* GLMine_SetCell.xib */; };
 		4AF9CA501FD6958400F4DC6B /* 登录注册.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9CA4F1FD6958400F4DC6B /* 登录注册.xcassets */; };
@@ -382,6 +383,7 @@
 		4ADB9BC51FD7F3D700AC7B08 /* GLMine_Set_ModifyPasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLMine_Set_ModifyPasswordController.xib; sourceTree = "<group>"; };
 		4ADB9BC91FD7F99200AC7B08 /* GLMine_Set_PhoneModifyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMine_Set_PhoneModifyController.h; sourceTree = "<group>"; };
 		4ADB9BCA1FD7F99200AC7B08 /* GLMine_Set_PhoneModifyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLMine_Set_PhoneModifyController.m; sourceTree = "<group>"; };
+		4AECCB221FE7A70000CFAFAA /* 加载动画.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "加载动画.xcassets"; sourceTree = "<group>"; };
 		4AF9CA4A1FD68B8C00F4DC6B /* GLMine_SetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMine_SetCell.h; sourceTree = "<group>"; };
 		4AF9CA4B1FD68B8C00F4DC6B /* GLMine_SetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLMine_SetCell.m; sourceTree = "<group>"; };
 		4AF9CA4C1FD68B8C00F4DC6B /* GLMine_SetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLMine_SetCell.xib; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 				F9560C911F7B8D920015FD21 /* 商城.xcassets */,
 				4AF9CA4F1FD6958400F4DC6B /* 登录注册.xcassets */,
 				4A124AEC1FDD742000E38782 /* 引导页和启动图.xcassets */,
+				4AECCB221FE7A70000CFAFAA /* 加载动画.xcassets */,
 			);
 			path = "图片资源";
 			sourceTree = "<group>";
@@ -1467,6 +1470,7 @@
 				4ADB9B9D1FD7C17700AC7B08 /* GLMine_ShareAchieveController.xib in Resources */,
 				4AC146631FD932010081E9EA /* GLMine_MyExchangeController.xib in Resources */,
 				4AF9CA501FD6958400F4DC6B /* 登录注册.xcassets in Resources */,
+				4AECCB231FE7A70000CFAFAA /* 加载动画.xcassets in Resources */,
 				4ADB9B641FD782DF00AC7B08 /* GLMine_MessageController.xib in Resources */,
 				4ADB9BBB1FD7EC8D00AC7B08 /* GLMine_SetController.xib in Resources */,
 				4A586B1D1F4D4CA000FDE330 /* GLClubController.xib in Resources */,

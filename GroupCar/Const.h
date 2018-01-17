@@ -87,7 +87,6 @@
 
 
 
-
 //H5页面链接
 #define H5_baseURL @"http://jj.51dztg.com/wecat/"
 
@@ -104,6 +103,5 @@
 #define H5_AgencyURL @"xy/agency.html"
 #define H5_BannerDetailURL @"bannerDetail.html"
 
-//http://jj.51dztg.com/wecat/xy/agency.html
 
 #endif /* Const_h */

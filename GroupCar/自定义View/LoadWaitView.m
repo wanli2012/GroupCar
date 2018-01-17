@@ -25,7 +25,8 @@
         NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"LoadWaitView" owner:self options:nil];
         self = viewArray[0];
         self.frame = frame;
-        self.backgroundColor=[UIColor clearColor];
+        
+//        self.backgroundColor = [UIColor clearColor];
         
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapgestrue)];
         [self addGestureRecognizer:tap];
